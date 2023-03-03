@@ -6,9 +6,10 @@ public class PowerUp : MonoBehaviour
 {
     public enum PowerUps : int
     {
+        OneUp = 1,
         Mushroom = 2,
         FireFlower = 3,
-        Star = 4
+        Star = 4,
     }
     public PowerUps Type;
     private Rigidbody2D Rigid2D;
@@ -42,7 +43,6 @@ public class PowerUp : MonoBehaviour
                 transform.Translate(Vector2.up * 2 * Time.deltaTime);
             else
             {
-                Debug.Log(Target);
                 transform.position = new Vector3(transform.position.x, Target, 0);
                 Spawning = false;
                 if (Type == PowerUps.FireFlower)

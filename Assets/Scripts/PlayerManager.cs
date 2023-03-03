@@ -5,13 +5,21 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public int PlayerState = 1;
-    public bool Invincible = false;
     public float InvincibleTimer = 8;
+    public Sprite[] Sprites;
+    public GameObject MarioSprite;
+
+    private Animator MarioAnimator;
+    private BoxCollider2D Collider;
+    private SpriteRenderer SpriteRender;
+    private bool Invincible = false;
     private float Timer;
     // Start is called before the first frame update
     void Start()
-    {
-        
+    {        
+        SpriteRender = MarioSprite.GetComponent<SpriteRenderer>();
+        Collider = GetComponent<BoxCollider2D>();
+        MarioAnimator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -41,10 +49,25 @@ public class PlayerManager : MonoBehaviour
             {
                 if ((int)Collected.Type > PlayerState)
                 {
-                    PlayerState = (int)Collected.Type;
+                    PlayerState++;
+                    ChangeSprite();
                 }
             }
+            if (Collected.Type == PowerUp.PowerUps.OneUp)
+            {
+                //game manager icriment lives
+            }
+            MarioAnimator.Play("Grow", 0, 0);
+            MarioSprite.transform.Translate(Vector3.up * (PlayerState > 1 ? 0.5f : 0), Space.Self);
+            Collider.size = new Vector2(1, (PlayerState > 1 ? 2 : 1));
+            Collider.offset = new Vector2(0, (PlayerState > 1 ? 0.5f : 0));
             Destroy(collision.gameObject);
         }
+    }
+
+    private void ChangeSprite()
+    {
+        Debug.Log("Ran");
+        SpriteRender.sprite = Sprites[PlayerState];
     }
 }
