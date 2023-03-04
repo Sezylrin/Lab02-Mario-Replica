@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     public int PlayerState = 1;
     public float InvincibleTimer = 8;
     public float ShotDelay = 0.25f;
+    public float BurstDelay = 0.5f;
     public Sprite[] Sprites;
     public GameObject MarioSprite;
     public GameObject FireProjectile;
@@ -18,7 +19,8 @@ public class PlayerManager : MonoBehaviour
     private SpriteRenderer SpriteRender;
     private bool Invincible = false;
     private float Timer;
-    private float FireTimer = 0;
+    public float FireTimer = 0;
+    public int BurstCount = 1;
     // Start is called before the first frame update
     void Start()
     {        
@@ -30,8 +32,10 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FireTimer > 0)
-            FireTimer--;
+        if (FireTimer > BurstDelay * -1)
+            FireTimer -= Time.deltaTime;
+        else
+            BurstCount = 1;
         if (Invincible == true)
         {
             Timer -= Time.deltaTime;
@@ -46,7 +50,16 @@ public class PlayerManager : MonoBehaviour
             {
                 GameObject Fireball = Instantiate(FireProjectile, transform.position + (new Vector3 (offset * Direction.x, 0.5f,0)),Quaternion.identity);
                 Fireball.GetComponent<FireBall>().SetDirection(Direction);
-                FireTimer = ShotDelay;
+                if(BurstCount == 1)
+                {
+                    FireTimer = ShotDelay;
+                    BurstCount++;
+                } 
+                else
+                {
+                    FireTimer = BurstDelay;
+                    BurstCount = 1;
+                }
             }
         }
     }
