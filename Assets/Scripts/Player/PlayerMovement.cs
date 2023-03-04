@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     #region State Parameters
         public bool IsFacingRight { get; private set; }
         public bool IsJumping { get; private set; }
+        public bool IsJumpCutting { get; private set; }
+        public bool IsRunning { get; private set; }
         public float LastOnGroundTime { get; private set; }
     #endregion
 
@@ -23,13 +25,9 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region Check Parameters
-        // [Header("Checks")]
+        [Header("Checks")]
         [SerializeField] private Transform groundCheckPoint;
         [SerializeField] private Vector2 groundCheckSize;
-        // [Space(5)]
-        // [SerializeField] private Transform _frontWallCheckPoint;
-        // [SerializeField] private Transform _backWallCheckPoint;
-        // [SerializeField] private Vector2 _wallCheckSize;
     #endregion
 
     #region Layers & Tags
@@ -46,8 +44,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Input.Player.Jump.started += ctx => OnJump();
-        Input.Player.Jump.canceled += ctx => OnJumpUp();
+        Input.Player.Jump.started += ctx => OnJumpInput();
+        Input.Player.Jump.canceled += ctx => OnJumpUpInput();
+        Input.Player.Run.started += ctx => OnRunInput();
+        Input.Player.Run.canceled += ctx => OnRunUpInput();
         SetGravityScale(data.gravityScale);
         IsFacingRight = true;
     }
@@ -101,6 +101,11 @@ public class PlayerMovement : MonoBehaviour
                 IsJumping = true;
                 Jump();
             }
+
+            if (IsJumpCutting && CanJumpCut())
+            {
+                JumpCut();
+            }
         #endregion
     }
 
@@ -116,19 +121,32 @@ public class PlayerMovement : MonoBehaviour
         #region Walk
             Walk(1);
         #endregion
+
+        #region Clamped Fall Speed
+            if (rb.velocity.y < -data.maxFallSpeed) rb.velocity = new Vector2(rb.velocity.x, -data.maxFallSpeed);
+        #endregion
     }
 
     #region Input Callbacks
-        private void OnJump()
+        private void OnJumpInput()
         {
             LastPressedJumpTime = data.jumpBufferTime;
+            IsJumpCutting = false;
         }
 
-        private void OnJumpUp()
+        private void OnJumpUpInput()
         {
-            // if (CanJumpCut())
-            //     CanJumpCut();
-            return;
+            IsJumpCutting = true;
+        }
+
+        private void OnRunInput()
+        {
+            IsRunning = true;
+        }
+
+        private void OnRunUpInput()
+        {
+            IsRunning = false;
         }
     #endregion
 
@@ -152,7 +170,8 @@ public class PlayerMovement : MonoBehaviour
 
         private void Walk(float lerpAmount)
         {
-            float targetSpeed = Input.Player.Move.ReadValue<Vector2>().x * data.walkMaxSpeed; //Calculate direction and target velocity
+            float runMultiplier = (!IsRunning) ? 1 : data.runMultiplier;
+            float targetSpeed = Input.Player.Move.ReadValue<Vector2>().x * (data.groundMaxSpeed * runMultiplier); //Calculate direction and target velocity
             float speedDif = targetSpeed - rb.velocity.x; //Calculate difference between current and target velocity.
 
             #region Acceleration Rate
@@ -160,9 +179,9 @@ public class PlayerMovement : MonoBehaviour
 
                 //Gets accel value based on if we are accelerating or trying to decelerate and applying multiplier if currently airborne.
                 if (LastOnGroundTime > 0) //If on ground
-                    accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? data.walkAccel : data.walkDecel;
+                    accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? data.groundAccel * runMultiplier : data.groundDecel * runMultiplier;
                 else
-                    accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? data.walkAccel * data.accelInAir : data.walkDecel * data.decelInAir;
+                    accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? data.groundAccel * data.accelInAir : data.groundDecel * data.decelInAir;
 
                 //If we want to walk but are already going faster than max walk speed
                 if ((rb.velocity.x > targetSpeed && targetSpeed > 0.01f ||
@@ -213,6 +232,12 @@ public class PlayerMovement : MonoBehaviour
                 rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             #endregion
         }
+
+        private void JumpCut()
+        {
+            IsJumpCutting = false;
+            rb.AddForce(Vector2.down * (rb.velocity.y * (1 - data.jumpCutMultiplier)), ForceMode2D.Impulse);
+        }
     #endregion
 
     #region Check Methods
@@ -225,6 +250,11 @@ public class PlayerMovement : MonoBehaviour
         private bool CanJump()
         {
             return LastOnGroundTime > 0 && !IsJumping && LastPressedJumpTime > 0;
+        }
+
+        private bool CanJumpCut()
+        {
+            return IsJumping && rb.velocity.y > 0;
         }
     #endregion
 }
