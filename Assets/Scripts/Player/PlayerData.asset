@@ -28,5 +28,5 @@ MonoBehaviour:
   turnPower: 1.2
   jumpForce: 33
   jumpCutMultiplier: 0
-  jumpBufferTime: 0.05
-  doKeepWalkMomentum: 0
+  jumpBufferTime: 0.096
+  doKeepWalkMomentum: 1
