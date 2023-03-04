@@ -21,9 +21,10 @@ public class PlayerData : ScriptableObject
 
     //GROUND
         [Header("Walk")]
-    public float walkMaxSpeed;
-    public float walkAccel;
-    public float walkDecel;
+    public float groundMaxSpeed;
+    public float groundAccel;
+    public float groundDecel;
+    [Range(1, 5)] public float runMultiplier;
     [Range(0, 1)] public float accelInAir;
     [Range(0, 1)] public float decelInAir;
     [Space(5)]
