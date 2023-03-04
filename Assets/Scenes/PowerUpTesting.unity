@@ -459,6 +459,7 @@ MonoBehaviour:
   PlayerState: 1
   InvincibleTimer: 8
   ShotDelay: 0.25
+  BurstDelay: 0.5
   Sprites:
   - {fileID: 38003446, guid: f1bda11db078b344ea7f4a3401bd314b, type: 3}
   - {fileID: -925240397, guid: f1bda11db078b344ea7f4a3401bd314b, type: 3}
@@ -467,6 +468,8 @@ MonoBehaviour:
   MarioSprite: {fileID: 904225731}
   FireProjectile: {fileID: 1922965605850337582, guid: fa042f3ced9e23447886dcef3bdf774f, type: 3}
   offset: 1
+  FireTimer: 0
+  BurstCount: 1
 --- !u!1001 &702528284
 PrefabInstance:
   m_ObjectHideFlags: 0
