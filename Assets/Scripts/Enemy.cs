@@ -39,6 +39,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         enemyTransform.position = enemyTransform.position + new Vector3(speed * Time.deltaTime, 0, 0); //Moves the enemy
+        if (enemyTransform.position.y < -20)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -140,5 +144,6 @@ public class Enemy : MonoBehaviour
         }
         enemySpriteRenderer.flipY = false;
         enemyCollider.enabled = false;
+        enemyAudioSource.Play();
     }
 }
