@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D enemyRigidbody;
     private AudioSource enemyAudioSource;
     private SpriteRenderer enemySpriteRenderer;
-    
+
     void Awake()
     {
         enemyTransform = this.gameObject.transform;
@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.layer == 7 || col.gameObject.tag == "Enemy" || col.gameObject.tag == "Shell")
+        if (col.gameObject.layer == 7 || (col.gameObject.tag == "Enemy" && this.gameObject.tag == "Enemy") || col.gameObject.tag == "Shell")
         {
             speed *= -1; //Changes enemy direction if it hits a wall
         }
@@ -63,30 +63,18 @@ public class Enemy : MonoBehaviour
                 this.gameObject.tag = "MovingShell";
                 CancelInvoke();
                 enemyAnimator.SetTrigger("Death");
-                foreach (ContactPoint2D hit in col.contacts) // Finds the impact point then determines direction shell should move
+                float x = col.gameObject.transform.position.x - enemyTransform.position.x;
+                if (x > 0)
                 {
-                    if (hit.normal.x > 0)
-                    {
-                        speed = 6;
-                    }
-                    else speed = -6;
+                    speed = -6;
                 }
+                else speed = 6;
             }
         }
-        if (col.gameObject.tag == "MovingShell")
+        if (col.gameObject.tag == "MovingShell" || col.gameObject.tag == "Fireball")
         {
-            death();
-            foreach (ContactPoint2D hit in col.contacts) // Finds the impact point then determines direction shell should move
-            {
-                if (hit.normal.x > 0)
-                {
-                    enemyRigidbody.AddForce(new Vector2(100, 100));
-                }
-                else
-                {
-                    enemyRigidbody.AddForce(new Vector2(-100, 100));
-                }
-            }
+            death((Vector2)col.gameObject.transform.position);
+
         }
     }
 
@@ -136,8 +124,9 @@ public class Enemy : MonoBehaviour
         speed = -3;
     }
 
-    void death()
+    public void death(Vector2 position)
     {
+        float x = position.x - enemyTransform.position.x;
         if (type == EnemyType.Koopa)
         {
             enemyAnimator.SetTrigger("Death");
@@ -145,5 +134,14 @@ public class Enemy : MonoBehaviour
         enemySpriteRenderer.flipY = false;
         enemyCollider.enabled = false;
         enemyAudioSource.Play();
+
+        if (x > 0)
+        {
+            enemyRigidbody.AddForce(new Vector2(100, 100));
+        }
+        else
+        {
+            enemyRigidbody.AddForce(new Vector2(-100, 100));
+        }
     }
 }
