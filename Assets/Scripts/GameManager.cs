@@ -5,6 +5,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     [Header("TextFields")]  
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private TMP_Text coinText;
@@ -22,6 +24,19 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private float currentTime;
 
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
     private void Start()
     {
         currentTime = startingTime;
@@ -36,7 +51,7 @@ public class GameManager : MonoBehaviour
     private void RunTimer()
     {
         currentTime -= timerSpeed * Time.deltaTime;
-        timerText.text = Mathf.RoundToInt(currentTime).ToString(); ;
+        timerText.text = Mathf.RoundToInt(currentTime).ToString();
         if (currentTime <= 0)
         {
             currentTime = 0;
@@ -57,6 +72,11 @@ public class GameManager : MonoBehaviour
     public void IncrementCoinCount(int amountToIncrease = 1)
     {
         int newCoinsCollected = coinsCollected + amountToIncrease;
+        if (newCoinsCollected == 100)
+        {
+            //TODO: Add life
+            newCoinsCollected = 0;
+        }
         coinsCollected = newCoinsCollected;
         coinText.text = coinsCollected.ToString("D2");
     }
