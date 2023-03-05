@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - PowerUp
+  - Enemy
+  - EnemyDeathTrigger
+  - Shell
+  - MovingShell
   layers:
   - Default
   - TransparentFX
