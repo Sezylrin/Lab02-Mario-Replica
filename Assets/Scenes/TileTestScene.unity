@@ -2392,9 +2392,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7764640910176109761, guid: 1866dadc7f1214b808effcd3552cf42a, type: 3}
+      propertyPath: blockType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764640910176109761, guid: 1866dadc7f1214b808effcd3552cf42a, type: 3}
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1846922984}
+    - target: {fileID: 7764640910176109761, guid: 1866dadc7f1214b808effcd3552cf42a, type: 3}
+      propertyPath: itemsToSpawn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7764640910176109761, guid: 1866dadc7f1214b808effcd3552cf42a, type: 3}
+      propertyPath: itemsToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 5690174519044975301, guid: a3a03c4f963f24b9e8c775adaba03f2c, type: 3}
     - target: {fileID: 7764640910176109762, guid: 1866dadc7f1214b808effcd3552cf42a, type: 3}
       propertyPath: m_RootOrder
       value: 10
