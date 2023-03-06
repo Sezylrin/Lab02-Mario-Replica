@@ -21,6 +21,7 @@ public class TileHit : MonoBehaviour
     private bool animating;
     private int maxHits;
     private SpriteRenderer spriteRenderer;
+    private bool timerStarted = false;
 
     private void Awake()
     {
@@ -125,6 +126,12 @@ public class TileHit : MonoBehaviour
             spriteRenderer.sprite = emptyBlock;
         }
 
+        if (blockType == BlockTypes.MultiCoinTile && !timerStarted)
+        {
+            timerStarted = true;
+            StartCoroutine(Enable10SecBlockTimer());
+        }
+
         StartCoroutine(Animate());
     }
 
@@ -156,6 +163,13 @@ public class TileHit : MonoBehaviour
         }
 
         transform.localPosition = to;
+    }
+
+    private IEnumerator Enable10SecBlockTimer()
+    {
+        yield return new WaitForSeconds(10);
+
+        maxHits = 1;
     }
 
     private bool TestCollision(Transform transformToTest, Transform other, Vector2 testDirection)
