@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4538476954842102716}
   - component: {fileID: 4538476954842102719}
   m_Layer: 9
-  m_Name: QuestionTile
+  m_Name: QuestionTilePowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,12 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4538476954842102718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.65, y: 1.667297, z: 0}
+  m_LocalPosition: {x: 1.57, y: 1.667297, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4538476954842102717
 SpriteRenderer:
@@ -146,9 +146,6 @@ MonoBehaviour:
   emptyBlock: {fileID: -1827825674, guid: f09adcba088e85144953fadb931b5e50, type: 3}
   playerManager: {fileID: 0}
   blockType: 2
-  itemsToSpawn:
-  - {fileID: 1881556942558318724, guid: 757209663593d1a43815f0f409a90464, type: 3}
-  - {fileID: 2543127841685499138, guid: 82cf3a92aa8fbd64b88125176e03e682, type: 3}
-  - {fileID: 1638570878312326234, guid: e5adfc5d8e58b4e4e88235686d37b954, type: 3}
+  possibleItemsToSpawn:
   - {fileID: 1881556942558318724, guid: 1310dfa563774ff44b60c3adb5e9321a, type: 3}
-  - {fileID: 5690174519044975301, guid: a3a03c4f963f24b9e8c775adaba03f2c, type: 3}
+  - {fileID: 2543127841685499138, guid: 82cf3a92aa8fbd64b88125176e03e682, type: 3}

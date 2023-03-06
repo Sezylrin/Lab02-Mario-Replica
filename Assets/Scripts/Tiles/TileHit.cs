@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public enum BlockTypes : int
 {
     BrickTile = 1,
     QuestionTile = 2,
     MultiCoinTile = 3,
+    BrickTileWithitem = 4,
 }
 
 public class TileHit : MonoBehaviour
@@ -14,7 +16,7 @@ public class TileHit : MonoBehaviour
     [SerializeField] Sprite emptyBlock;
     [SerializeField] PlayerManager playerManager;
     [SerializeField] private BlockTypes blockType;
-    [SerializeField] private GameObject[] itemsToSpawn;
+    [SerializeField] private GameObject[] possibleItemsToSpawn;
 
     private bool animating;
     private int maxHits;
@@ -37,6 +39,9 @@ public class TileHit : MonoBehaviour
                 break;
             case BlockTypes.MultiCoinTile:
                 maxHits = -1;
+                break;
+            case BlockTypes.BrickTileWithitem:
+                maxHits = 1;
                 break;
             default:
                 maxHits = -1;
@@ -88,15 +93,29 @@ public class TileHit : MonoBehaviour
 
     private void HitTile()
     {
-        if (maxHits != 0 && itemsToSpawn.Length > 0)
+        //If the length is 1, it's a regular item tile so spawn the item
+        if (maxHits != 0 && possibleItemsToSpawn.Length == 1)
         {
-            int randomIndex = Random.Range(0, itemsToSpawn.Length);
-            GameObject item = itemsToSpawn[randomIndex];
-            if (item != null)
+            GameObject itemToSpawn = possibleItemsToSpawn[0];
+            if (itemToSpawn != null)
             {
-                Instantiate(item, transform.position, Quaternion.identity);
+                Instantiate(itemToSpawn, transform.position, Quaternion.identity);
             }
+        }
 
+        //If the length is 2, it's a question tile with a mushroom inside of it
+        if (maxHits != 0 && possibleItemsToSpawn.Length == 2)
+        {
+            if (playerManager.PlayerState == 1)
+            {
+                GameObject mushroom = possibleItemsToSpawn.FirstOrDefault(obj => obj.name == "Mushroom");
+                Instantiate(mushroom, transform.position, Quaternion.identity);
+            }
+            else if (playerManager.PlayerState > 1)
+            {
+                GameObject fireFlower = possibleItemsToSpawn.FirstOrDefault(obj => obj.name == "Fire Flower");
+                Instantiate(fireFlower, transform.position, Quaternion.identity);
+            }
         }
 
         maxHits--;

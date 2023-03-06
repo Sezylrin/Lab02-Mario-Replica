@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7764640910176109763
 SpriteRenderer:
@@ -145,5 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   emptyBlock: {fileID: -1827825674, guid: f09adcba088e85144953fadb931b5e50, type: 3}
   playerManager: {fileID: 0}
-  blockType: 1
-  itemsToSpawn: []
+  blockType: 2
+  possibleItemsToSpawn:
+  - {fileID: 1881556942558318724, guid: 757209663593d1a43815f0f409a90464, type: 3}
