@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class BlockCoin : MonoBehaviour
 {
+    private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
         GameManager.Instance.IncrementCoinCount();
+        GameManager.Instance.AddToScore(200);
+        audioSource.Play();
         StartCoroutine(Animate());
     }
 
@@ -16,8 +27,9 @@ public class BlockCoin : MonoBehaviour
         Vector3 animatedPosition = restingPosition + Vector3.up * 2f;
         yield return Move(restingPosition, animatedPosition);
         yield return Move(animatedPosition, restingPosition);
+        spriteRenderer.enabled = false;
 
-        Destroy(gameObject);
+        Destroy(gameObject, audioSource.clip.length);
     }
 
     private IEnumerator Move(Vector3 from, Vector3 to)
