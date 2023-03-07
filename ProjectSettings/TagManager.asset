@@ -10,18 +10,19 @@ TagManager:
   - Shell
   - MovingShell
   - Fireball
+  - Barrier
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Obstacle
+  - Background
+  - Background Details
+  - Camera
   - 
   - 
   - 
@@ -46,4 +47,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 4131258295
+    locked: 0
+  - name: Player
+    uniqueID: 1136789059
+    locked: 0
+  - name: Foreground
+    uniqueID: 2343567079
     locked: 0
