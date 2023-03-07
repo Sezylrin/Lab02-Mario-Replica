@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = -3;
+        speed = -2;
     }
 
     // Update is called once per frame
@@ -75,6 +75,10 @@ public class Enemy : MonoBehaviour
         {
             death((Vector2)col.gameObject.transform.position);
 
+        }
+        if (col.gameObject.tag == "Barrier")
+        {
+            Destroy(this.gameObject);
         }
     }
 
