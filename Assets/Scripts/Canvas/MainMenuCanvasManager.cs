@@ -18,13 +18,13 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !animating)
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) && !animating)
         {
             animating = true;
             selectedOptionIndex = selectedOptionIndex == 0 ? 1 : 0;
             StartCoroutine(MoveGoomba(goombaRectTransform.anchoredPosition, optionPositions[selectedOptionIndex]));
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && !animating)
+        else if ((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) && !animating)
         {
             animating = true;
             selectedOptionIndex = selectedOptionIndex == 1 ? 0 : 1;
