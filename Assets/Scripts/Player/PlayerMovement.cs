@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(-force, ForceMode2D.Impulse);
         }
 
-        private void Walk(float lerpAmount)
+        public void Walk(float lerpAmount)
         {
             float runMultiplier = (!IsRunning) ? 1 : data.runMultiplier;
             float targetSpeed = Input.Player.Move.ReadValue<Vector2>().x * (data.groundMaxSpeed * runMultiplier); //Calculate direction and target velocity
@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector2.right * movement);
         }
 
-        private void Turn()
+        public void Turn()
         {
             var transformVar = transform;
             Vector3 scale = transformVar.localScale;
@@ -265,7 +265,9 @@ public class PlayerMovement : MonoBehaviour
     #region Other Methods
         private void PlayJumpSound()
         {
+            if (!AudioSource) return;
             AudioSource.clip = (PlayerManager.PlayerState > 1) ? AudioClips[0] : AudioClips[1];
+            if (!AudioSource.clip) return;
             AudioSource.Play();
         }
     #endregion
