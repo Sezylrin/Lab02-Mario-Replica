@@ -22,10 +22,14 @@ public class TileHit : MonoBehaviour
     private int maxHits;
     private SpriteRenderer spriteRenderer;
     private bool timerStarted = false;
+    private AudioSource audioSource;
+    private BoxCollider2D boxCollider2D;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     private void Start()
@@ -88,7 +92,10 @@ public class TileHit : MonoBehaviour
     private void DestroyBrickTile()
     {
         maxHits = 0;
-        Destroy(gameObject);
+        spriteRenderer.enabled = false;
+        boxCollider2D.enabled = false;
+        audioSource.Play();
+        Destroy(gameObject, audioSource.clip.length);
         //TODO: Animate destruction of block then destroy tile
     }
 
