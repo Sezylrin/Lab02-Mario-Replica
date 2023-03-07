@@ -860,28 +860,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &963893921 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4727791057303454749, guid: e0269db49b60446ce9145c07e3833155, type: 3}
-  m_PrefabInstance: {fileID: 287653334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1134750920 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4727791056460892490, guid: e0269db49b60446ce9145c07e3833155, type: 3}
-  m_PrefabInstance: {fileID: 287653334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1310219145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,17 +1144,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1947188366 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4727791056088667499, guid: e0269db49b60446ce9145c07e3833155, type: 3}
-  m_PrefabInstance: {fileID: 287653334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1949527062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,13 +1173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99abbd844d1614e3e91603c946e5cbc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1134750920}
-  coinText: {fileID: 2140673136}
-  timerText: {fileID: 963893921}
-  worldText: {fileID: 1947188366}
-  startingTime: 400
   timerSpeed: 3
-  world: 1-1
 --- !u!4 &1949527064
 Transform:
   m_ObjectHideFlags: 0
@@ -1429,17 +1390,6 @@ MonoBehaviour:
   offset: 0
   FireTimer: 0
   BurstCount: 1
---- !u!114 &2140673136 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4727791056686335982, guid: e0269db49b60446ce9145c07e3833155, type: 3}
-  m_PrefabInstance: {fileID: 287653334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2330490545449039136
 PrefabInstance:
   m_ObjectHideFlags: 0
