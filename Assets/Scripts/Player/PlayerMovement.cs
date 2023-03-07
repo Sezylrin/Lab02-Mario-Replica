@@ -9,7 +9,9 @@ public class PlayerMovement : MonoBehaviour
         [SerializeField] private PlayerData data;
         public InputManager Input { get; private set; }
         public Rigidbody2D rb { get; private set; }
-        // public Animator anim { get; private set; }
+        public PlayerManager PlayerManager { get; private set; }
+        public AudioSource AudioSource { get; private set; }
+        [SerializeField] private List<AudioClip> AudioClips;
     #endregion
 
     #region State Parameters
@@ -39,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         Input = new InputManager();
-        // anim = GetComponent<Animator>();
+        PlayerManager = GetComponent<PlayerManager>();
+        AudioSource = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -132,6 +135,7 @@ public class PlayerMovement : MonoBehaviour
         {
             LastPressedJumpTime = data.jumpBufferTime;
             IsJumpCutting = false;
+            PlayJumpSound();
         }
 
         private void OnJumpUpInput()
@@ -255,6 +259,14 @@ public class PlayerMovement : MonoBehaviour
         private bool CanJumpCut()
         {
             return IsJumping && rb.velocity.y > 0;
+        }
+    #endregion
+
+    #region Other Methods
+        private void PlayJumpSound()
+        {
+            AudioSource.clip = (PlayerManager.PlayerState > 1) ? AudioClips[0] : AudioClips[1];
+            AudioSource.Play();
         }
     #endregion
 }
