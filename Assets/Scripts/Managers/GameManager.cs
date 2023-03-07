@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     private int coinsCollected = 0;
     private int score = 0;
     private float currentTime;
+    private int lives = 0;
+    private bool levelStarted = false;
 
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (currentTime != 0)
+        if (levelStarted)
         {
             RunTimer();
         }
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         coinsCollected = 0;
         score = 0;
+        levelStarted = true;
 
         switch (scene)
         {
@@ -74,7 +77,7 @@ public class GameManager : MonoBehaviour
         int newCoinsCollected = coinsCollected + amountToIncrease;
         if (newCoinsCollected == 100)
         {
-            //TODO: Add life
+            AddLives();
             newCoinsCollected = 0;
         }
         coinsCollected = newCoinsCollected;
@@ -82,4 +85,13 @@ public class GameManager : MonoBehaviour
     }
 
     public int GetCoinsCollected() { return coinsCollected; }
+
+    public void AddLives(int livesToAdd = 1)
+    {
+        int newLives = lives + livesToAdd;
+        lives = newLives;
+        //TODO: Update UI
+    }
+
+    public int GetLives() { return lives; }
 }

@@ -26,11 +26,6 @@ public class GameCanvasManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        GameManager.Instance.NewGame(Loader.Scene.OneOne);
-    }
-
     public void SetScoreText(string text)
     {
         scoreText.text = text;
