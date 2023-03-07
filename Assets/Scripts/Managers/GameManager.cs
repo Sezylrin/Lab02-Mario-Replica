@@ -1,24 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [Header("TextFields")]  
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text coinText;
-    [SerializeField] private TMP_Text timerText;
-    [SerializeField] private TMP_Text worldText;
-
     [Header("Timer")]
-    [SerializeField] private float startingTime;
     [SerializeField] private int timerSpeed = 3;
-
-    [Header("World")]
-    [SerializeField] private string world;
 
     private int coinsCollected = 0;
     private int score = 0;
@@ -37,21 +26,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        currentTime = startingTime;
-        worldText.text = world;
-    }
-
     private void Update()
     {
-        RunTimer();
+        if (currentTime != 0)
+        {
+            RunTimer();
+        }
+    }
+
+    public void NewGame(Loader.Scene scene)
+    {
+        coinsCollected = 0;
+        score = 0;
+
+        switch (scene)
+        {
+            case Loader.Scene.OneOne:
+                currentTime = 400;
+                GameCanvasManager.Instance.SetWorldText("1-1");
+                break;
+        }
     }
 
     private void RunTimer()
     {
         currentTime -= timerSpeed * Time.deltaTime;
-        timerText.text = Mathf.RoundToInt(currentTime).ToString();
+        GameCanvasManager.Instance.SetTimerText(Mathf.RoundToInt(currentTime).ToString());
         if (currentTime <= 0)
         {
             currentTime = 0;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     {
         int newScore = score + amountToIncrease;
         score = newScore;
-        scoreText.text = newScore.ToString("D6");
+        GameCanvasManager.Instance.SetScoreText(newScore.ToString("D6"));
     }
 
     public int GetScore() { return score; }
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
             newCoinsCollected = 0;
         }
         coinsCollected = newCoinsCollected;
-        coinText.text = coinsCollected.ToString("D2");
+        GameCanvasManager.Instance.SetCoinText(coinsCollected.ToString("D2"));
     }
 
     public int GetCoinsCollected() { return coinsCollected; }
