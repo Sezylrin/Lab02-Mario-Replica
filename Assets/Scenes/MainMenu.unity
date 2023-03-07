@@ -4871,6 +4871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b294669eca0b4d588304168a173e304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goombaRectTransform: {fileID: 1760531784}
 --- !u!4 &1499677682
 Transform:
   m_ObjectHideFlags: 0

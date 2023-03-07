@@ -1,11 +1,62 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MainMenuCanvasManager : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    private void Start()
+    [SerializeField] private RectTransform goombaRectTransform;
+
+    private int selectedOptionIndex = 0;
+    private Vector2[] optionPositions = new Vector2[2];
+    private bool animating = false;
+
+    private void Awake()
     {
-        Loader.Load(Loader.Scene.OneOne);
+        optionPositions[0] = new Vector2(goombaRectTransform.anchoredPosition.x, goombaRectTransform.anchoredPosition.y);
+        optionPositions[1] = new Vector2(goombaRectTransform.anchoredPosition.x, -32f);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !animating)
+        {
+            animating = true;
+            selectedOptionIndex = selectedOptionIndex == 0 ? 1 : 0;
+            StartCoroutine(MoveGoomba(goombaRectTransform.anchoredPosition, optionPositions[selectedOptionIndex]));
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && !animating)
+        {
+            animating = true;
+            selectedOptionIndex = selectedOptionIndex == 1 ? 0 : 1;
+            StartCoroutine(MoveGoomba(goombaRectTransform.anchoredPosition, optionPositions[selectedOptionIndex]));
+        }
+        else if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        {
+            if (selectedOptionIndex == 0)
+            {
+                Loader.Load(Loader.Scene.OneOne);
+            }
+            else
+            {
+                Application.Quit();
+            }
+        }
+    }
+
+    private IEnumerator MoveGoomba(Vector2 from, Vector2 to)
+    {
+        const float duration = 0.1f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            goombaRectTransform.anchoredPosition = Vector2.Lerp(from, to, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        goombaRectTransform.anchoredPosition = to;
+        animating = false;
     }
 }
