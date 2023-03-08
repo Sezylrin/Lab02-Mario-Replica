@@ -26,21 +26,28 @@ public class EnemyDeathTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EnemyScript.dead)
+        if (EnemyScript.gameObject.tag == "MovingShell")
         {
-            triggerCollider.enabled = false;
+            triggerCollider.enabled = true;
         }
-        else triggerCollider.enabled = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
-            //print("Killed Enemy");
-            EnemyScript.stomp(); //If player jumps on top of enemy, the enemy dies
-            triggerCollider.enabled = false;
-            Invoke("enableCollider", 10f);
+            if (EnemyScript.gameObject.tag == "Enemy")
+            {
+                EnemyScript.stomp(); //If player jumps on top of enemy, the enemy dies
+                triggerCollider.enabled = false;
+                Invoke("enableCollider", 10f);
+            }
+            else if (EnemyScript.gameObject.tag == "MovingShell")
+            {
+                EnemyScript.gameObject.tag = "Shell";
+                EnemyScript.speed = 0;
+                EnemyScript.bouncePlayer();
+            }
         }
     }
 
