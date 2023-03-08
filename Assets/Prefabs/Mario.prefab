@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 1554282382139848409}
   - component: {fileID: 1554282382139848390}
   - component: {fileID: 5339651369369585060}
+  - component: {fileID: 755965454025563327}
   m_Layer: 3
   m_Name: Mario
   m_TagString: Player
@@ -259,6 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb42a6f94b9cbe408c65d23cc587451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerupClip: {fileID: 0}
+  oneUpClip: {fileID: 0}
   PlayerState: 1
   InvincibleTimer: 8
   ShotDelay: 0.25
@@ -316,6 +319,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: bafd72cc7842bef4ea45a9721f00acaa, type: 2}
   NeedTurn: 0
   Play: 1
+  flagSliding: 0
   layer: 0
 --- !u!82 &5339651369369585060
 AudioSource:
@@ -413,3 +417,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &755965454025563327
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554282382139848415}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0

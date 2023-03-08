@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 4
   Impulse: 10
-  Speed: 5
+  Speed: 3.5
   Box: {fileID: 2755801898514688088}
   Circle: {fileID: 985671907}
 --- !u!95 &-5161767650283317758

@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 1
   Impulse: 0
-  Speed: 5
+  Speed: 3.5
   Box: {fileID: 7362667314144744576}
   Circle: {fileID: 6789393519064798836}
 --- !u!82 &8825716300397934622

@@ -20,9 +20,11 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer enemySpriteRenderer;
     public PlayerManager playerScript;
     public bool dead;
-
+    public bool ToActivate = true;
+    private GameObject Mario;
     void Awake()
     {
+        
         enemyTransform = this.gameObject.transform;
         enemyAnimator = GetComponent<Animator>();
         enemyCollider = GetComponent<BoxCollider2D>();
@@ -35,13 +37,21 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = -2;
+        Mario = GameObject.Find("Mario");
+        speed = 0;
         dead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log(Mathf.Abs(Mario.transform.position.x - transform.position.x));
+        if (Mathf.Abs(Mario.transform.position.x - transform.position.x) < 11 && ToActivate == true)
+        {
+            speed = -2;
+            ToActivate = false;
+        }
         enemyTransform.position = enemyTransform.position + new Vector3(speed * Time.deltaTime, 0, 0); //Moves the enemy
         if (enemyTransform.position.y < -20)
         {

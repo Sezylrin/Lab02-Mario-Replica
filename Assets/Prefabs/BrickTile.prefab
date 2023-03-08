@@ -147,6 +147,7 @@ MonoBehaviour:
   emptyBlock: {fileID: -1827825674, guid: f09adcba088e85144953fadb931b5e50, type: 3}
   blockType: 1
   possibleItemsToSpawn: []
+  BrickBits: {fileID: 1793179792331481376, guid: fe23b50b6c9c3a54eb727b51cd977440, type: 3}
 --- !u!82 &5096234899133271613
 AudioSource:
   m_ObjectHideFlags: 0
