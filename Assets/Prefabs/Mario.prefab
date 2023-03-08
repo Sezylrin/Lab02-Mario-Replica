@@ -270,6 +270,8 @@ MonoBehaviour:
   MarioSprite: {fileID: 1554282381924748885}
   FireProjectile: {fileID: 1922965605850337582, guid: fa042f3ced9e23447886dcef3bdf774f, type: 3}
   offset: 1
+  Invincible: 0
+  Timer: 0
   FireTimer: 0
   BurstCount: 1
 --- !u!114 &1554282382139848409
@@ -302,6 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e622d76f8f630aa4fbcdce9535f83d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FPS: 0
+  Timer: 0
   data: {fileID: 11400000, guid: bafd72cc7842bef4ea45a9721f00acaa, type: 2}
   NeedTurn: 0
   Play: 1
+  layer: 0
