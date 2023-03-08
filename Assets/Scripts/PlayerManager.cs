@@ -107,16 +107,7 @@ public class PlayerManager : MonoBehaviour
         //PlayerState = 0 means player has died
         if (PlayerState == 0)
         {
-            if (GameManager.Instance.GetLives() == 0)
-            { 
-                //Wait for death animation to finish before calling this
-                GameManager.Instance.GameOver();
-            }
-            else
-            {
-                //Wait for death animation to finish before calling this
-                GameManager.Instance.Respawn();
-            }
+            GameManager.Instance.HandleMarioDeath();
         }
     }
 }

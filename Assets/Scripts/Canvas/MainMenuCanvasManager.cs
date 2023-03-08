@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
     {
         optionPositions[0] = new Vector2(goombaRectTransform.anchoredPosition.x, goombaRectTransform.anchoredPosition.y);
         optionPositions[1] = new Vector2(goombaRectTransform.anchoredPosition.x, -32f);
+        //Destroy the GameCanvasManager if it exists
+        if (GameObject.Find("Canvas"))
+        {
+            Destroy(GameObject.Find("Canvas"));
+        }
     }
 
     private void Update()
