@@ -22,6 +22,7 @@ public class MarioAnim : MonoBehaviour
     private string[] Walk = new string[] { "Walk-Small", "Walk-Big", "Walk-Fire" };
     private string[] Jump = new string[] { "Jump-Small", "Jump-Big", "Jump-Fire" };
     private string[] Turn = new string[] { "Turn-Small", "Turn-Big", "Turn-Fire" };
+    private string[] Slide = new string[] { "Slide-Small", "Slide-Big", "Slide-Fire" };
     private bool Falling = false;
     public int layer = 0;
     void Start()
@@ -37,6 +38,11 @@ public class MarioAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(flagSliding); //Debugme
+        if (flagSliding)
+        {
+            MarioAnimator.Play(Slide[MarioState.PlayerState - 1]);
+        }
         if (MarioAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
             Play = true;
