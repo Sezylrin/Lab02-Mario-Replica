@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D enemyRigidbody;
     private AudioSource enemyAudioSource;
     private SpriteRenderer enemySpriteRenderer;
+    public PlayerManager playerScript;
 
     void Awake()
     {
@@ -55,8 +56,15 @@ public class Enemy : MonoBehaviour
         {
             if (this.gameObject.tag == "Enemy")
             {
-                print("Player Took Damage");
-                //Hurt player
+                if (playerScript.Invincible == true)
+                {
+                    death((Vector2)col.gameObject.transform.position);
+                }
+                else
+                {
+                    playerScript.TakeDamage();
+                    print("Player Took Damage");
+                }
             }
             else if (this.gameObject.tag == "Shell")
             {
