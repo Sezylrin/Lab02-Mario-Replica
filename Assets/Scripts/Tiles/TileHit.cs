@@ -16,6 +16,7 @@ public class TileHit : MonoBehaviour
     [SerializeField] Sprite emptyBlock;
     [SerializeField] private BlockTypes blockType;
     [SerializeField] private GameObject[] possibleItemsToSpawn;
+    public GameObject BrickBits;
 
     private bool animating;
     private int maxHits;
@@ -101,6 +102,10 @@ public class TileHit : MonoBehaviour
         spriteRenderer.enabled = false;
         boxCollider2D.enabled = false;
         audioSource.Play();
+        Instantiate(BrickBits, this.transform.position, Quaternion.identity).GetComponent<BrickBreakingBits>().direction =new Vector2(-0.5f, 1f) * 5;
+        Instantiate(BrickBits, this.transform.position, Quaternion.identity).GetComponent<BrickBreakingBits>().direction =new Vector2(0.5f, 1f) * 5;
+        Instantiate(BrickBits, this.transform.position, Quaternion.identity).GetComponent<BrickBreakingBits>().direction =new Vector2(-0.5f, 0.5f) * 5;
+        Instantiate(BrickBits, this.transform.position, Quaternion.identity).GetComponent<BrickBreakingBits>().direction =new Vector2(0.5f, 0.5f) * 5;
         Destroy(gameObject, audioSource.clip.length);
         //TODO: Animate destruction of block then destroy tile
     }
