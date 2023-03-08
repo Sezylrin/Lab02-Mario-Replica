@@ -9,12 +9,5 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.NewGame(scene);
-        StartCoroutine(Wait5Seconds());
-    }
-
-    private IEnumerator Wait5Seconds()
-    {
-        yield return new WaitForSeconds(5);
-        //GameObject.Find("Mario").GetComponent<PlayerManager>().TakeDamage();
     }
 }

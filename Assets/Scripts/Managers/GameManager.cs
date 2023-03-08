@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         switch (scene)
         {
             case Loader.Scene.OneOne:
-                currentTime = 10;
+                currentTime = 400;
                 GameCanvasManager.Instance.SetTimerText(currentTime.ToString());
                 break;
         }
@@ -124,6 +124,13 @@ public class GameManager : MonoBehaviour
         currentTime = 0;
         lives = 3;
         Loader.Load(Loader.Scene.GameOver);
+    }
+
+    public void Victory()
+    {
+        levelStarted = false;
+        lives = 3;
+        Loader.Load(Loader.Scene.Victory);
     }
 
     public void HandleMarioDeath()

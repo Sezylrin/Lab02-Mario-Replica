@@ -10,6 +10,7 @@ public static class Loader
         MainMenu,
         PreLevel,
         GameOver,
+        Victory,
         OneOne,
     }
 
