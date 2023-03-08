@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    [SerializeField] private GameObject floatingTextPrefab;
 
     [Header("Timer")]
     [SerializeField] private int timerSpeed = 3;
@@ -83,6 +87,15 @@ public class GameManager : MonoBehaviour
         int newScore = score + amountToIncrease;
         score = newScore;
         GameCanvasManager.Instance.SetScoreText(newScore.ToString("D6"));
+    }
+
+    public void DisplayFloatingText(int displayText, Vector3 positionToSpawn)
+    {
+        Transform worldSpaceCanvasTransform = GameObject.Find("WorldCanvas").GetComponent<Transform>();
+        GameObject textObj = Instantiate(floatingTextPrefab);
+        textObj.transform.SetParent(worldSpaceCanvasTransform, false);
+        textObj.transform.position = positionToSpawn + new Vector3(0.5f, 0, 0);
+        textObj.GetComponent<TMP_Text>().text = displayText.ToString();
     }
 
     public int GetScore() { return score; }
