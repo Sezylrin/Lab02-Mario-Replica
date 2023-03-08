@@ -118,7 +118,7 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage()
     {
         //TODO: Implement functionality
-        PlayerState = 1;
+        PlayerState = PlayerState > 1 ? 1 : 0;
         MarioSprite.transform.Translate(Vector3.up * 0.5f * -1, Space.Self);
         //PlayerState = 0 means player has died
         if (PlayerState == 0)
