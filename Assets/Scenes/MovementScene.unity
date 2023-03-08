@@ -236,11 +236,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1554282382139848411, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.99
+      value: -1.64
       objectReference: {fileID: 0}
     - target: {fileID: 1554282382139848411, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.95
+      value: 4.72
       objectReference: {fileID: 0}
     - target: {fileID: 1554282382139848411, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1409,6 +1409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb42a6f94b9cbe408c65d23cc587451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerupClip: {fileID: 0}
+  oneUpClip: {fileID: 0}
   PlayerState: 1
   InvincibleTimer: 8
   ShotDelay: 0.25

@@ -81,11 +81,11 @@ public class Pipe : MonoBehaviour
         {
             ExitUpPipe(player);
             playerCamera.transform.position = surfaceCameraPosition;
+            movingCamera.enabled = true;
+            movingCamera.previousXPos = playerCamera.transform.position.x;
             _finishedWarp = true;
             return;
         }
-        movingCamera.enabled = true;
-        movingCamera.previousXPos = playerCamera.transform.position.x;
         ResumeTime(player);
     }
 
@@ -98,6 +98,7 @@ public class Pipe : MonoBehaviour
         _warpTween.Duration = 1.0f;
         _warpTween.Time = 0.0f;
         _tweening = true;
+        player.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Background";
     }
 
     private void ExitUpPipe(Transform player)
@@ -113,6 +114,7 @@ public class Pipe : MonoBehaviour
     private void ResumeTime(Transform player)
     {
         Time.timeScale = 1;
+        player.gameObject.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Player";
         player.GetComponentInParent<PlayerMovement>().enabled = true;
     }
 }

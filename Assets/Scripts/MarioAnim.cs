@@ -38,12 +38,11 @@ public class MarioAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(flagSliding); //Debugme
         if (flagSliding)
         {
             MarioAnimator.Play(Slide[MarioState.PlayerState - 1]);
         }
-        if (MarioAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+        if (MarioAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle") && !flagSliding)
         {
             Play = true;
             Time.timeScale = 1;
@@ -117,7 +116,6 @@ public class MarioAnim : MonoBehaviour
         }
         else if (IsRight != MarioMove.IsFacingRight && NeedTurn == true && Mathf.Abs(Rigid2D.velocity.x) > data.groundMaxSpeed * 0.1f)
         {
-            Debug.Log((IsRight != MarioMove.IsFacingRight) + " " + NeedTurn + (Mathf.Abs(Rigid2D.velocity.x) > data.groundMaxSpeed * 0.1f));
             MarioAnimator.speed = 1;
             MarioAnimator.Play(Turn[MarioState.PlayerState - 1]);
         }
