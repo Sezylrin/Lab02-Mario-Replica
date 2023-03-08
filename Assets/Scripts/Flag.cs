@@ -7,7 +7,6 @@ public class Flag : MonoBehaviour
 {
     private AudioSource _audioSource;
     private PlayerMovement _playerMovement;
-    private GameManager _gameManager;
     [SerializeField] private Transform flagTop;
     private struct Tween
     {
@@ -28,7 +27,6 @@ public class Flag : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-        _gameManager = FindObjectOfType<GameManager>();
         _levelManager = FindObjectOfType<LevelManager>();
     }
 
@@ -139,9 +137,7 @@ public class Flag : MonoBehaviour
                 break;
         }
 
-        if (!_gameManager)
-            return;
-        _gameManager.AddToScore(amountToAdd);
-        _gameManager.DisplayFloatingText(amountToAdd.ToString(), this.gameObject.transform.position);
+        GameManager.Instance.AddToScore(amountToAdd);
+        GameManager.Instance.DisplayFloatingText(amountToAdd.ToString(), this.gameObject.transform.position);
     }
 }

@@ -94,7 +94,9 @@ public class Pipe : MonoBehaviour
         var other = player.gameObject;
         _warpTween.Target = other.transform;
         _warpTween.StartPos = other.transform.position;
-        _warpTween.EndPos = this.transform.position;
+        _warpTween.EndPos = (pipeFacing == Direction.Up)
+            ? new Vector2(other.transform.position.x, this.transform.position.y)
+            : this.transform.position;
         _warpTween.Duration = 1.0f;
         _warpTween.Time = 0.0f;
         _tweening = true;

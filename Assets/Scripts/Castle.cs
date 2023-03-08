@@ -18,7 +18,7 @@ public class Castle : MonoBehaviour
     {
         if (!_loadVictory) return;
         if (_levelManager.GetComponent<AudioSource>().isPlaying) return;
-        SceneManager.LoadScene("Victory");
+        GameManager.Instance.Victory();
     }
 
     private void OnCollisionEnter2D(Collision2D col)
