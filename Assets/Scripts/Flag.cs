@@ -8,6 +8,17 @@ public class Flag : MonoBehaviour
     private AudioSource _audioSource;
     private PlayerMovement _playerMovement;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Transform flagTop;
+    private struct Tween
+    {
+        public Transform Target;
+        public Vector2 StartPos;
+        public Vector2 EndPos;
+        public float Duration;
+        public float Time;
+    };
+    private Tween _flagSlideTween;
+    private bool _isSliding;
 
     public bool IsExiting { get; private set; }
 
@@ -26,41 +37,95 @@ public class Flag : MonoBehaviour
         _playerMovement = col.GetComponentInParent<PlayerMovement>();
         if (!_playerMovement)
             return;
-        StopPlayer(_playerMovement);
 
-        if (gameManager) gameManager.AddToScore(100);
-        // Or
-        if (gameManager) gameManager.AddToScore(5000); //TODO: Score points / Initiate end sequence
+        StopPlayer();
+
+        AddScore(col);
 
         SlideDown(col);
+    }
 
-        _playerMovement.Turn();
-        col.gameObject.transform.position = new Vector3(playerPos.x, 0.0f, playerPos.z); //Move to other side of Flag
 
-        StartPlayer(_playerMovement);
-
-        IsExiting = true; //TODO: Exit Stage Right
+    private void Update()
+    {
+        if (!_isSliding)
+            return;
+        if (Vector2.Distance(_flagSlideTween.Target.position, _flagSlideTween.EndPos) > 0.1f)
+        {
+            _flagSlideTween.Target.position = Vector2.Lerp(_flagSlideTween.StartPos, _flagSlideTween.EndPos,
+                _flagSlideTween.Time / _flagSlideTween.Duration);
+            _flagSlideTween.Time += Time.deltaTime;
+        }
+        else
+        {
+            _flagSlideTween.Target.position = _flagSlideTween.EndPos;
+            _isSliding = false;
+            LeaveFlag(_flagSlideTween.Target);
+            ExitRight();
+        }
     }
 
     private void FixedUpdate()
     {
         if (!IsExiting)
             return;
-        _playerMovement.Walk(1);
+        _playerMovement.Walk(1, 1);
     }
 
     private void SlideDown(Collider2D col)
     {
-        col.gameObject.transform.position = new Vector3(col.gameObject.transform.position.x, 0.0f, col.gameObject.transform.position.z); //TODO: Tween Down
+        col.transform.Translate(flagTop.position.x - col.transform.position.x, 0.0f, 0.0f);
+        _flagSlideTween.Target = col.transform;
+        _flagSlideTween.StartPos = col.transform.position;
+        _flagSlideTween.EndPos = this.transform.position;
+        _flagSlideTween.Duration = 2 * (Vector2.Distance(col.transform.position, this.transform.position) /
+                                        Vector2.Distance(flagTop.position, this.transform.position));
+        _flagSlideTween.Time = 0.0f;
+        _isSliding = true;
     }
 
-    private void StopPlayer(PlayerMovement playerMovement)
+    private void LeaveFlag(Transform player)
     {
-        playerMovement.Input.Disable();
-        playerMovement.rb.isKinematic = true;
+        _playerMovement.Turn();
+        player.Translate(Vector3.right);
     }
-    private void StartPlayer(PlayerMovement playerMovement)
+
+    private void ExitRight()
     {
-        playerMovement.rb.isKinematic = false;
+        _playerMovement.rb.isKinematic = false;
+        _playerMovement.Turn();
+        IsExiting = true;
+    }
+
+    private void StopPlayer()
+    {
+        _playerMovement.Input.Disable();
+        _playerMovement.rb.isKinematic = true;
+    }
+
+    private void AddScore(Collider2D col)
+    {
+        int amountToAdd = 0;
+        float range = 100 * (col.transform.position.y - this.transform.position.y) /
+                      (flagTop.position.y - this.transform.position.y);
+        switch (range)
+        {
+            case > 80:
+                amountToAdd = 5000;
+                break;
+            case > 60:
+                amountToAdd = 2000;
+                break;
+            case > 40:
+                amountToAdd = 800;
+                break;
+            case > 20:
+                amountToAdd = 400;
+                break;
+            default:
+                amountToAdd = 100;
+                break;
+        }
+        gameManager.AddToScore(amountToAdd);
     }
 }

@@ -103,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 IsJumping = true;
                 Jump();
+                PlayJumpSound();
             }
 
             if (IsJumpCutting && CanJumpCut())
@@ -122,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Walk
-            Walk(1);
+            Walk(1, Input.Player.Move.ReadValue<Vector2>().x);
         #endregion
 
         #region Clamped Fall Speed
@@ -135,7 +136,6 @@ public class PlayerMovement : MonoBehaviour
         {
             LastPressedJumpTime = data.jumpBufferTime;
             IsJumpCutting = false;
-            PlayJumpSound();
         }
 
         private void OnJumpUpInput()
@@ -172,10 +172,10 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(-force, ForceMode2D.Impulse);
         }
 
-        public void Walk(float lerpAmount)
+        public void Walk(float lerpAmount, float walkXInput)
         {
             float runMultiplier = (!IsRunning) ? 1 : data.runMultiplier;
-            float targetSpeed = Input.Player.Move.ReadValue<Vector2>().x * (data.groundMaxSpeed * runMultiplier); //Calculate direction and target velocity
+            float targetSpeed = walkXInput * (data.groundMaxSpeed * runMultiplier); //Calculate direction and target velocity
             float speedDif = targetSpeed - rb.velocity.x; //Calculate difference between current and target velocity.
 
             #region Acceleration Rate
