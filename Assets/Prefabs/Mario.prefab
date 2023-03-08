@@ -102,9 +102,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1136789059
+  m_SortingLayer: 3
+  m_SortingOrder: 100
   m_Sprite: {fileID: -925240397, guid: f1bda11db078b344ea7f4a3401bd314b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -173,7 +173,7 @@ Transform:
   - {fileID: 1554282381924748882}
   - {fileID: 1554282380847252782}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1554282382139848413
 Rigidbody2D:
@@ -296,6 +296,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  ObsticalLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1554282382139848390
 MonoBehaviour:
   m_ObjectHideFlags: 0

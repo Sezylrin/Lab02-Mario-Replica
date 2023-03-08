@@ -70,6 +70,10 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
+        if (PlayerState == 0 && transform.position.y < -5.5f)
+        {
+            GameManager.Instance.HandleMarioDeath();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -111,6 +115,7 @@ public class PlayerManager : MonoBehaviour
 
     private void MarioPowerUp()
     {
+        MarioAnimator.speed = 1;
         if (PlayerState == 2)
         {
             MarioAnimator.Play("Grow");
@@ -131,7 +136,13 @@ public class PlayerManager : MonoBehaviour
         //PlayerState = 0 means player has died
         if (PlayerState == 0)
         {
-            GameManager.Instance.HandleMarioDeath();
+            MarioAnimation.Play = false;
+            MarioAnimator.Play("Death");
+            Rigidbody2D Rigid = GetComponent<Rigidbody2D>();
+            GetComponent<PlayerMovement>().enabled = false;
+            GetComponent<BoxCollider2D>().excludeLayers = ~0;
+            Rigid.velocity = Vector2.zero;
+            Rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
         }
     }
 }
