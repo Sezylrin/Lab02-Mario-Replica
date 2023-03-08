@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     private AudioSource enemyAudioSource;
     private SpriteRenderer enemySpriteRenderer;
     public PlayerManager playerScript;
+    public bool dead;
 
     void Awake()
     {
@@ -28,12 +29,14 @@ public class Enemy : MonoBehaviour
         enemyRigidbody = GetComponent<Rigidbody2D>();
         enemyAudioSource = GetComponent<AudioSource>();
         enemySpriteRenderer = GetComponent<SpriteRenderer>();
+        playerScript = GameObject.Find("Mario").GetComponent<PlayerManager>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         speed = -2;
+        dead = false;
     }
 
     // Update is called once per frame
@@ -92,6 +95,7 @@ public class Enemy : MonoBehaviour
 
     public void stomp()
     {
+        dead = true;
         enemyAnimator.SetTrigger("Death");
         speed = 0;
         enemyAudioSource.Play();
@@ -129,6 +133,7 @@ public class Enemy : MonoBehaviour
 
     void respawn()
     {
+        dead = false;
         enemyAnimator.SetTrigger("Respawn");
         this.gameObject.tag = "Enemy";
         enemyCollider.size = new Vector2(1, 1.5f);
@@ -138,6 +143,7 @@ public class Enemy : MonoBehaviour
 
     public void death(Vector2 position)
     {
+        dead = true;
         float x = position.x - enemyTransform.position.x;
         if (type == EnemyType.Koopa)
         {
