@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class VictoryCanvasManager : MonoBehaviour
 {
+    private AudioSource audioSource;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(Wait5Seconds());
     }
 
     private IEnumerator Wait5Seconds()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(audioSource.clip.length);
         Loader.Load(Loader.Scene.MainMenu);
     }
 }

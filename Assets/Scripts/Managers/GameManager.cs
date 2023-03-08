@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private int lives = 3;
     private bool levelStarted = false;
     private string world;
+    private int highScore = 0;
 
     private void Awake()
     {
@@ -55,6 +56,10 @@ public class GameManager : MonoBehaviour
 
     public void Respawn()
     {
+        if (score > highScore)
+        {
+            highScore = score;
+        }
         levelStarted = false;
         lives--;
         GameCanvasManager.Instance.SetTimerText("");
@@ -119,6 +124,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        if (score > highScore)
+        {
+            highScore = score;
+        }
         levelStarted = false;
         GameCanvasManager.Instance.SetTimerText("");
         currentTime = 0;
@@ -130,6 +139,10 @@ public class GameManager : MonoBehaviour
     {
         levelStarted = false;
         lives = 3;
+        if (score > highScore)
+        {
+            highScore = score;
+        }
         Loader.Load(Loader.Scene.Victory);
     }
 
@@ -143,5 +156,7 @@ public class GameManager : MonoBehaviour
         {
             Respawn();
         }
-    }   
+    }
+
+    public int GetHighScore() { return highScore; }
 }

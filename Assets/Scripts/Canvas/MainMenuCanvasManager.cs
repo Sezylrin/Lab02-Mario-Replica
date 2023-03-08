@@ -1,19 +1,23 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private TMP_Text highscoreText;
     [SerializeField] private RectTransform goombaRectTransform;
 
     private int selectedOptionIndex = 0;
     private Vector2[] optionPositions = new Vector2[2];
     private bool animating = false;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         optionPositions[0] = new Vector2(goombaRectTransform.anchoredPosition.x, goombaRectTransform.anchoredPosition.y);
         optionPositions[1] = new Vector2(goombaRectTransform.anchoredPosition.x, -32f);
+        highscoreText.text = GameManager.Instance.GetHighScore().ToString("D6");
+        audioSource = GetComponent<AudioSource>();
         //Destroy the GameCanvasManager if it exists
         if (GameObject.Find("Canvas"))
         {
@@ -40,7 +44,8 @@ public class MainMenu : MonoBehaviour
             if (selectedOptionIndex == 0)
             {
                 GameManager.Instance.SetWorld("1-1");
-                Loader.Load(Loader.Scene.PreLevel);
+                audioSource.Play();
+                StartCoroutine(LoadLevel(audioSource.clip.length));
             }
             else
             {
@@ -64,5 +69,11 @@ public class MainMenu : MonoBehaviour
 
         goombaRectTransform.anchoredPosition = to;
         animating = false;
+    }
+
+    private IEnumerator LoadLevel(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Loader.Load(Loader.Scene.PreLevel);
     }
 }
