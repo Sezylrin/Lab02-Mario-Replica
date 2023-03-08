@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 4727791056012809188}
   - component: {fileID: 4727791056012809189}
   - component: {fileID: 4727791056012809190}
+  - component: {fileID: 1138056767}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -443,7 +444,7 @@ RectTransform:
   - {fileID: 4727791055762831251}
   - {fileID: 4727791057036953631}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -512,6 +513,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1138056767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4727791056012809192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749eddd167bfc4ebda0e7ac3a6c4f018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 4727791056460892490}
+  coinText: {fileID: 4727791056686335982}
+  timerText: {fileID: 4727791057303454749}
+  worldText: {fileID: 4727791056088667499}
 --- !u!1 &4727791056088667501
 GameObject:
   m_ObjectHideFlags: 0

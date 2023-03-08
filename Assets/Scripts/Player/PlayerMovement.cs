@@ -67,16 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        #region Timer
-            LastOnGroundTime -= Time.deltaTime;
-            LastPressedJumpTime -= Time.deltaTime;
-        #endregion
-
-        #region General Checks
-            if (Input.Player.Move.ReadValue<Vector2>().x != 0)
-                CheckDirectionToFace(Input.Player.Move.ReadValue<Vector2>().x > 0);
-        #endregion
-
         #region Physics Checks
             if (!IsJumping)
             {
@@ -85,6 +75,15 @@ public class PlayerMovement : MonoBehaviour
                         groundLayer)) //Checks if set box overlaps with ground
                     LastOnGroundTime = data.coyoteTime;//If so sets the lastGrounded to coyoteTime
             }
+        #endregion
+
+        #region General Checks
+            if (Input.Player.Move.ReadValue<Vector2>().x != 0)
+                if (LastOnGroundTime >= data.coyoteTime)
+                {
+                    Debug.Log(LastOnGroundTime + ", " + data.coyoteTime);
+                    CheckDirectionToFace(Input.Player.Move.ReadValue<Vector2>().x > 0);
+                }
         #endregion
 
         #region Gravity
@@ -111,15 +110,16 @@ public class PlayerMovement : MonoBehaviour
                 JumpCut();
             }
         #endregion
+        #region Timer
+            LastOnGroundTime -= Time.deltaTime;
+            LastPressedJumpTime -= Time.deltaTime;
+        #endregion
     }
 
     private void FixedUpdate()
     {
         #region Drag
-            if (LastOnGroundTime <= 0)
-                Drag(data.dragAmount);
-            else
-                Drag(data.frictionAmount);
+            Drag(LastOnGroundTime <= data.coyoteTime ? data.dragAmount : data.frictionAmount);
         #endregion
 
         #region Walk

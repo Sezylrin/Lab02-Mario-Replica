@@ -22,10 +22,14 @@ public class TileHit : MonoBehaviour
     private int maxHits;
     private SpriteRenderer spriteRenderer;
     private bool timerStarted = false;
+    private AudioSource audioSource;
+    private BoxCollider2D boxCollider2D;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
     private void Start()
@@ -88,34 +92,22 @@ public class TileHit : MonoBehaviour
     private void DestroyBrickTile()
     {
         maxHits = 0;
-        Destroy(gameObject);
+        spriteRenderer.enabled = false;
+        boxCollider2D.enabled = false;
+        audioSource.Play();
+        Destroy(gameObject, audioSource.clip.length);
         //TODO: Animate destruction of block then destroy tile
     }
 
     private void HitTile()
     {
-        //If the length is 1, it's a regular item tile so spawn the item
+        StartCoroutine(Animate());
         if (maxHits != 0 && possibleItemsToSpawn.Length == 1)
         {
             GameObject itemToSpawn = possibleItemsToSpawn[0];
-            if (itemToSpawn != null)
+            if (itemToSpawn != null && itemToSpawn.name == "BlockCoin")
             {
                 Instantiate(itemToSpawn, transform.position, Quaternion.identity);
-            }
-        }
-
-        //If the length is 2, it's a question tile with a mushroom inside of it
-        if (maxHits != 0 && possibleItemsToSpawn.Length == 2)
-        {
-            if (playerManager.PlayerState == 1)
-            {
-                GameObject mushroom = possibleItemsToSpawn.FirstOrDefault(obj => obj.name == "Mushroom");
-                Instantiate(mushroom, transform.position, Quaternion.identity);
-            }
-            else if (playerManager.PlayerState > 1)
-            {
-                GameObject fireFlower = possibleItemsToSpawn.FirstOrDefault(obj => obj.name == "Fire Flower");
-                Instantiate(fireFlower, transform.position, Quaternion.identity);
             }
         }
 
@@ -131,8 +123,6 @@ public class TileHit : MonoBehaviour
             timerStarted = true;
             StartCoroutine(Enable10SecBlockTimer());
         }
-
-        StartCoroutine(Animate());
     }
 
     private IEnumerator Animate()
@@ -143,6 +133,31 @@ public class TileHit : MonoBehaviour
         Vector3 animatedPosition = restingPosition + Vector3.up * 0.5f;
         yield return Move(restingPosition, animatedPosition);
         yield return Move(animatedPosition, restingPosition);
+
+        //If the length is 1, it's a regular item tile so spawn the item
+        if (possibleItemsToSpawn.Length == 1)
+        {
+            GameObject itemToSpawn = possibleItemsToSpawn[0];
+            if (itemToSpawn != null && itemToSpawn.name != "BlockCoin")
+            {
+                Instantiate(itemToSpawn, transform.position, Quaternion.identity);
+            }
+        }
+
+        //If the length is 2, it's a question tile with a mushroom inside of it
+        if (possibleItemsToSpawn.Length == 2)
+        {
+            if (playerManager.PlayerState == 1)
+            {
+                GameObject mushroom = possibleItemsToSpawn.FirstOrDefault(obj => obj.name == "Mushroom");
+                Instantiate(mushroom, transform.position, Quaternion.identity);
+            }
+            else if (playerManager.PlayerState > 1)
+            {
+                GameObject fireFlower = possibleItemsToSpawn.FirstOrDefault(obj => obj.name == "Fire Flower");
+                Instantiate(fireFlower, transform.position, Quaternion.identity);
+            }
+        }
 
         animating = false;
     }
