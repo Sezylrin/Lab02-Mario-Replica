@@ -17,6 +17,7 @@ public class BlockCoin : MonoBehaviour
     {
         GameManager.Instance.IncrementCoinCount();
         GameManager.Instance.AddToScore(200);
+        GameManager.Instance.DisplayFloatingText("200", gameObject.transform.position);
         audioSource.Play();
         StartCoroutine(Animate());
     }

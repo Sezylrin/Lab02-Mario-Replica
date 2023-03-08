@@ -110,7 +110,6 @@ public class MarioAnim : MonoBehaviour
             if (Mathf.Abs(Rigid2D.velocity.x) < data.groundMaxSpeed * 0.1f)
             {
                 NeedTurn = false;
-                Debug.Log("running2");
             }
             MarioAnimator.applyRootMotion = false;
             IsRight = MarioMove.IsFacingRight;

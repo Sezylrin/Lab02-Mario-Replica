@@ -51,8 +51,8 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                     ""id"": ""7460fdc0-2111-43be-836f-fcb32375733a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)"",
-                    ""initialStateCheck"": false
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -190,9 +190,9 @@ public partial class @InputManager: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9bde9f68-5a10-4b11-97d3-950a474e7a1c"",
+                    ""id"": ""d6cff2d5-5222-4160-8f9d-b129baf07d80"",
                     ""path"": ""<Keyboard>/x"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": ""KBM"",
                     ""action"": ""Run"",
