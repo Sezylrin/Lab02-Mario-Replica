@@ -12,8 +12,9 @@ public class GameManager : MonoBehaviour
     private int coinsCollected = 0;
     private int score = 0;
     private float currentTime;
-    private int lives = 0;
+    private int lives = 3;
     private bool levelStarted = false;
+    private string world;
 
     private void Awake()
     {
@@ -40,15 +41,25 @@ public class GameManager : MonoBehaviour
     {
         coinsCollected = 0;
         score = 0;
-        levelStarted = true;
 
         switch (scene)
         {
             case Loader.Scene.OneOne:
                 currentTime = 400;
-                GameCanvasManager.Instance.SetWorldText("1-1");
+                GameCanvasManager.Instance.SetTimerText(currentTime.ToString());
                 break;
         }
+
+        levelStarted = true;
+    }
+
+    public void Respawn()
+    {
+        levelStarted = false;
+        lives--;
+        GameCanvasManager.Instance.SetTimerText("");
+        currentTime = 0;
+        Loader.Load(Loader.Scene.PreLevel);
     }
 
     private void RunTimer()
@@ -58,7 +69,14 @@ public class GameManager : MonoBehaviour
         if (currentTime <= 0)
         {
             currentTime = 0;
-            //TODO: Display gameover screen
+            if (lives == 0)
+            {
+                GameOver();
+            }
+            else
+            {
+                Respawn();
+            }
         }
     }
 
@@ -93,5 +111,25 @@ public class GameManager : MonoBehaviour
         //TODO: Update UI
     }
 
+    public void SetLevelStarted(bool started)
+    {
+        levelStarted = started;
+    }
+
     public int GetLives() { return lives; }
+
+    public void SetWorld(string world) {
+        this.world = world;
+    }
+
+    public string GetWorld() { return world; }
+
+    public void GameOver()
+    {
+        levelStarted = false;
+        GameCanvasManager.Instance.SetTimerText("");
+        currentTime = 0;
+        lives = 3;
+        Loader.Load(Loader.Scene.GameOver);
+    }
 }

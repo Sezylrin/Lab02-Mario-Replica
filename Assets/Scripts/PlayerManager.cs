@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     public int BurstCount = 1;
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         SpriteRender = MarioSprite.GetComponent<SpriteRenderer>();
         Collider = GetComponent<BoxCollider2D>();
         MarioAnimator = GetComponentInChildren<Animator>();
@@ -48,13 +48,13 @@ public class PlayerManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X) && FireTimer <= 0)
             {
-                GameObject Fireball = Instantiate(FireProjectile, transform.position + (new Vector3 (offset * Direction.x, 0.5f,0)),Quaternion.identity);
+                GameObject Fireball = Instantiate(FireProjectile, transform.position + (new Vector3(offset * Direction.x, 0.5f, 0)), Quaternion.identity);
                 Fireball.GetComponent<FireBall>().SetDirection(Direction);
-                if(BurstCount == 1)
+                if (BurstCount == 1)
                 {
                     FireTimer = ShotDelay;
                     BurstCount++;
-                } 
+                }
                 else
                 {
                     FireTimer = BurstDelay;
@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
             }
             if (Collected.Type == PowerUp.PowerUps.OneUp)
             {
-                //game manager icriment lives
+                GameManager.Instance.AddLives();
             }
             MarioAnimator.Play("Grow", 0, 0);
             MarioSprite.transform.Translate(Vector3.up * (PlayerState == 2 ? 0.5f : 0), Space.Self);
@@ -98,5 +98,25 @@ public class PlayerManager : MonoBehaviour
     {
         Debug.Log("Ran");
         SpriteRender.sprite = Sprites[PlayerState];
+    }
+
+    public void TakeDamage()
+    {
+        //TODO: Implement functionality
+        PlayerState--;
+        //PlayerState = 0 means player has died
+        if (PlayerState == 0)
+        {
+            if (GameManager.Instance.GetLives() == 0)
+            { 
+                //Wait for death animation to finish before calling this
+                GameManager.Instance.GameOver();
+            }
+            else
+            {
+                //Wait for death animation to finish before calling this
+                GameManager.Instance.Respawn();
+            }
+        }
     }
 }

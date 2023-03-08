@@ -34,7 +34,8 @@ public class MainMenu : MonoBehaviour
         {
             if (selectedOptionIndex == 0)
             {
-                Loader.Load(Loader.Scene.OneOne);
+                GameManager.Instance.SetWorld("1-1");
+                Loader.Load(Loader.Scene.PreLevel);
             }
             else
             {

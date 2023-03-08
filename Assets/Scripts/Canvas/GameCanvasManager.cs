@@ -24,6 +24,7 @@ public class GameCanvasManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        worldText.text = GameManager.Instance.GetWorld();
     }
 
     public void SetScoreText(string text)

@@ -9,7 +9,7 @@ public static class Loader
     {
         MainMenu,
         PreLevel,
-        DeathScreen,
+        GameOver,
         OneOne,
     }
 
