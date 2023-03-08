@@ -15,17 +15,17 @@ public class PlayerManager : MonoBehaviour
     public bool Invincible = false;
 
     private MarioAnim MarioAnimation;
-    private Vector2 Direction = Vector2.left;
+    private Vector2 Direction = Vector2.right;
     private Animator MarioAnimator;
     private BoxCollider2D Collider;
-    private SpriteRenderer SpriteRender;
+    private PlayerMovement MarioMove;
     public float Timer;
     public float FireTimer = 0;
     public int BurstCount = 1;
     // Start is called before the first frame update
     void Start()
     {
-        SpriteRender = MarioSprite.GetComponent<SpriteRenderer>();
+        MarioMove = GetComponent<PlayerMovement>();
         Collider = GetComponent<BoxCollider2D>();
         MarioAnimator = GetComponentInChildren<Animator>();
         MarioAnimation = GetComponent<MarioAnim>();
@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Direction = MarioMove.IsFacingRight ? Vector2.right : Vector2.left;
         if (FireTimer > BurstDelay * -1)
             FireTimer -= Time.deltaTime;
         else
@@ -104,11 +105,12 @@ public class PlayerManager : MonoBehaviour
     {
         if (PlayerState == 2)
         {
-            Debug.Log("ran");
             MarioAnimator.Play("Grow");
         }
         if(PlayerState == 3)
         {
+
+            Debug.Log("ran");
             MarioAnimator.Play("Grow-Fire");
         }
     }
@@ -116,7 +118,7 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage()
     {
         //TODO: Implement functionality
-        PlayerState = 1;
+        PlayerState = PlayerState > 1 ? 1 : 0;
         MarioSprite.transform.Translate(Vector3.up * 0.5f * -1, Space.Self);
         //PlayerState = 0 means player has died
         if (PlayerState == 0)
