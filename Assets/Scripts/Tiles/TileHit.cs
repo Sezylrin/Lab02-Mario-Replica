@@ -58,6 +58,7 @@ public class TileHit : MonoBehaviour
     {
         if (!animating && maxHits != 0 && collision.gameObject.CompareTag("Player"))
         {
+            playerManager = collision.gameObject.GetComponent<PlayerManager>();
             if (TestCollision(collision.transform, transform, Vector2.up))
             {
                 Hit();
