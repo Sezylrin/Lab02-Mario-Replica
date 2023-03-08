@@ -37,7 +37,6 @@ public class MarioAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(flagSliding); //Debugme
         if (MarioAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
             Play = true;
