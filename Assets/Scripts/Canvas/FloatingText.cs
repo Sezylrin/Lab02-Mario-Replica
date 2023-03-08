@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FloatingText : MonoBehaviour
 {
-    public float floatSpeed = 1.0f;
-    public float lifetime = 1.5f;
+    private readonly float floatSpeed = 4.0f;
+    private readonly float lifetime = 1.0f;
 
     private void Start()
     {

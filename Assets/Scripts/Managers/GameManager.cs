@@ -89,13 +89,13 @@ public class GameManager : MonoBehaviour
         GameCanvasManager.Instance.SetScoreText(newScore.ToString("D6"));
     }
 
-    public void DisplayFloatingText(int displayText, Vector3 positionToSpawn)
+    public void DisplayFloatingText(string displayText, Vector3 positionToSpawn)
     {
         Transform worldSpaceCanvasTransform = GameObject.Find("WorldCanvas").GetComponent<Transform>();
         GameObject textObj = Instantiate(floatingTextPrefab);
         textObj.transform.SetParent(worldSpaceCanvasTransform, false);
         textObj.transform.position = positionToSpawn + new Vector3(0.5f, 0, 0);
-        textObj.GetComponent<TMP_Text>().text = displayText.ToString();
+        textObj.GetComponent<TMP_Text>().text = displayText;
     }
 
     public int GetScore() { return score; }

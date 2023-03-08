@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2665960079609374108}
   - component: {fileID: 2665960079609374110}
   - component: {fileID: 2665960079609374111}
+  - component: {fileID: 1237843648142365061}
   m_Layer: 5
   m_Name: FloatingText
   m_TagString: Untagged
@@ -135,3 +136,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1237843648142365061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2665960079609374109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 049407ff975fd4cdf8222634100554af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 1
+  lifetime: 1.5
