@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private bool levelStarted = false;
     private string world;
     private int highScore = 0;
+    private bool respawnCalled = false;
 
     private void Awake()
     {
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame(Loader.Scene scene)
     {
+        respawnCalled = false;
         coinsCollected = 0;
         score = 0;
 
@@ -60,15 +62,19 @@ public class GameManager : MonoBehaviour
 
     public void Respawn()
     {
-        if (score > highScore)
+        if (!respawnCalled)
         {
-            highScore = score;
+            respawnCalled = true;
+            if (score > highScore)
+            {
+                highScore = score;
+            }
+            levelStarted = false;
+            lives--;
+            GameCanvasManager.Instance.SetTimerText("");
+            currentTime = 0;
+            Loader.Load(Loader.Scene.PreLevel);
         }
-        levelStarted = false;
-        lives--;
-        GameCanvasManager.Instance.SetTimerText("");
-        currentTime = 0;
-        Loader.Load(Loader.Scene.PreLevel);
     }
 
     private void RunTimer()
@@ -129,7 +135,8 @@ public class GameManager : MonoBehaviour
 
     public int GetLives() { return lives; }
 
-    public void SetWorld(string world) {
+    public void SetWorld(string world)
+    {
         this.world = world;
     }
 
@@ -137,15 +144,19 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (score > highScore)
+        if (!respawnCalled)
         {
-            highScore = score;
+            respawnCalled = true;
+            if (score > highScore)
+            {
+                highScore = score;
+            }
+            levelStarted = false;
+            GameCanvasManager.Instance.SetTimerText("");
+            currentTime = 0;
+            lives = 3;
+            Loader.Load(Loader.Scene.GameOver);
         }
-        levelStarted = false;
-        GameCanvasManager.Instance.SetTimerText("");
-        currentTime = 0;
-        lives = 3;
-        Loader.Load(Loader.Scene.GameOver);
     }
 
     public void Victory()
