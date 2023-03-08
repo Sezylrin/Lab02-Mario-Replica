@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         }
         if (col.gameObject.tag == "Player")
         {
-            if (this.gameObject.tag == "Enemy")
+            if (this.gameObject.tag == "Enemy" || this.gameObject.tag == "MovingShell")
             {
                 if (playerScript.Invincible == true)
                 {
@@ -99,12 +99,13 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetTrigger("Death");
         speed = 0;
         enemyAudioSource.Play();
-
+        bouncePlayer();
         //Grant player score
 
         if (type == EnemyType.Goomba)
         {
             print("Goomba Died");
+            this.gameObject.tag = "Untagged";
             enemyCollider.enabled = false;
             enemyRigidbody.isKinematic = true;
             enemyTransform.position = enemyTransform.position + new Vector3(0, -0.31f, 0);
@@ -161,5 +162,10 @@ public class Enemy : MonoBehaviour
         {
             enemyRigidbody.AddForce(new Vector2(-100, 100));
         }
+    }
+
+    public void bouncePlayer()
+    {
+        playerScript.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(20, 700));
     }
 }
