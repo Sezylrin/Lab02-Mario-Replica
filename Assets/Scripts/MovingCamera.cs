@@ -6,7 +6,7 @@ public class MovingCamera : MonoBehaviour
 {
     public GameObject player;
     private double currentXPos;
-    private double previousXPos;
+    public double previousXPos;
 
     // Start is called before the first frame update
     void Start()

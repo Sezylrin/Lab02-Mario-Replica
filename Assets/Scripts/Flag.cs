@@ -30,7 +30,6 @@ public class Flag : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        // Time.timeScale = 0;
         _audioSource.Play();
         var playerPos = col.transform.position;
         if (!col.gameObject.CompareTag("Player"))
@@ -93,6 +92,7 @@ public class Flag : MonoBehaviour
         _playerMovement.Turn();
         player.Translate(Vector3.right);
         _marioAnim.flagSliding = false;
+        _marioAnim.Play = true;
     }
 
     private void ExitRight()

@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1700045152869983582
 MonoBehaviour:
@@ -50,7 +50,7 @@ MonoBehaviour:
   connectedPoint: {fileID: 0}
   playerCamera: {fileID: 0}
   undergroundCameraPosition: {x: 148.5, y: -12.5, z: -10}
-  surfaceCameraPosition: {x: 0, y: 1, z: -10}
+  surfaceCameraPosition: {x: 160, y: 2.5, z: -10}
 --- !u!61 &1700045152869983580
 BoxCollider2D:
   m_ObjectHideFlags: 0
