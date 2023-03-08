@@ -19,6 +19,7 @@ public class Flag : MonoBehaviour
     };
     private Tween _flagSlideTween;
     private bool _isSliding;
+    private MarioAnim _marioAnim;
 
     public bool IsExiting { get; private set; }
 
@@ -75,6 +76,9 @@ public class Flag : MonoBehaviour
     private void SlideDown(Collider2D col)
     {
         col.transform.Translate(flagTop.position.x - col.transform.position.x, 0.0f, 0.0f);
+        if (!_playerMovement.IsFacingRight) _playerMovement.Turn();
+        _marioAnim = col.gameObject.GetComponentInChildren<MarioAnim>();
+        _marioAnim.flagSliding = true;
         _flagSlideTween.Target = col.transform;
         _flagSlideTween.StartPos = col.transform.position;
         _flagSlideTween.EndPos = this.transform.position;
@@ -88,6 +92,7 @@ public class Flag : MonoBehaviour
     {
         _playerMovement.Turn();
         player.Translate(Vector3.right);
+        _marioAnim.flagSliding = false;
     }
 
     private void ExitRight()
@@ -100,6 +105,7 @@ public class Flag : MonoBehaviour
     private void StopPlayer()
     {
         _playerMovement.Input.Disable();
+        _playerMovement.rb.velocity = Vector2.zero;
         _playerMovement.rb.isKinematic = true;
     }
 

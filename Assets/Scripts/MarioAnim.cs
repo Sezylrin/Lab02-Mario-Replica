@@ -16,6 +16,7 @@ public class MarioAnim : MonoBehaviour
     private bool IsRight = true;
     public bool NeedTurn = false;
     public bool Play = true;
+    public bool flagSliding = false;
     
     private string[] Idle = new string[] { "Idle-Small", "Idle-Big", "Idle-Fire" };
     private string[] Walk = new string[] { "Walk-Small", "Walk-Big", "Walk-Fire" };
@@ -36,7 +37,7 @@ public class MarioAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(flagSliding); //Debugme
         if (MarioAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
             Play = true;

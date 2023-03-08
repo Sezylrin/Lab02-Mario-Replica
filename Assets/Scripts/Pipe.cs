@@ -45,6 +45,7 @@ public class Pipe : MonoBehaviour
                 break;
         }
         Time.timeScale = 0;
+        playerMovement.rb.velocity = Vector2.zero;
         playerMovement.enabled = false;
         _audioSource.Play();
         EnterPipe(col);
