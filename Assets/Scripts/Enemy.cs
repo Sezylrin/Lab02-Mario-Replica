@@ -45,8 +45,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(Mathf.Abs(Mario.transform.position.x - transform.position.x));
         if (Mathf.Abs(Mario.transform.position.x - transform.position.x) < 11 && ToActivate == true)
         {
             speed = -2;

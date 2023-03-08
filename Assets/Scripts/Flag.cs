@@ -7,7 +7,7 @@ public class Flag : MonoBehaviour
 {
     private AudioSource _audioSource;
     private PlayerMovement _playerMovement;
-    [SerializeField] private GameManager gameManager;
+    private GameManager _gameManager;
     [SerializeField] private Transform flagTop;
     private struct Tween
     {
@@ -26,17 +26,17 @@ public class Flag : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        _audioSource.Play();
-        var playerPos = col.transform.position;
         if (!col.gameObject.CompareTag("Player"))
             return;
         _playerMovement = col.GetComponentInParent<PlayerMovement>();
         if (!_playerMovement)
             return;
+        _audioSource.Play();
 
         StopPlayer();
 
@@ -78,6 +78,7 @@ public class Flag : MonoBehaviour
         if (!_playerMovement.IsFacingRight) _playerMovement.Turn();
         _marioAnim = col.gameObject.GetComponentInChildren<MarioAnim>();
         _marioAnim.flagSliding = true;
+        _marioAnim.Play = false;
         _flagSlideTween.Target = col.transform;
         _flagSlideTween.StartPos = col.transform.position;
         _flagSlideTween.EndPos = this.transform.position;
@@ -111,7 +112,7 @@ public class Flag : MonoBehaviour
 
     private void AddScore(Collider2D col)
     {
-        int amountToAdd = 0;
+        int amountToAdd;
         float range = 100 * (col.transform.position.y - this.transform.position.y) /
                       (flagTop.position.y - this.transform.position.y);
         switch (range)
@@ -132,6 +133,10 @@ public class Flag : MonoBehaviour
                 amountToAdd = 100;
                 break;
         }
-        gameManager.AddToScore(amountToAdd);
+
+        if (!_gameManager)
+            return;
+        _gameManager.AddToScore(amountToAdd);
+        _gameManager.DisplayFloatingText(amountToAdd.ToString(), this.gameObject.transform.position);
     }
 }
