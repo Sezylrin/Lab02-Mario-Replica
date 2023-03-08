@@ -106,6 +106,8 @@ MonoBehaviour:
   speed: 0
   playerScript: {fileID: 0}
   dead: 0
+  ToActivate: 1
+  Mario: {fileID: 1554282382139848415, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
 --- !u!95 &8137902431477367404
 Animator:
   serializedVersion: 5
