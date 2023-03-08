@@ -289,8 +289,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: bafd72cc7842bef4ea45a9721f00acaa, type: 2}
   AudioClips:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: c0c7d0002bed67b4e941428bfaa0e41f, type: 3}
+  - {fileID: 8300000, guid: 9c92f8ea33f52da47a801affa038a2a9, type: 3}
   groundCheckPoint: {fileID: 1554282380847252782}
   groundCheckSize: {x: 0.9, y: 0.8}
   groundLayer:
