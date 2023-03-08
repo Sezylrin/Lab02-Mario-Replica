@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     #region Layers & Tags
         [Header("Layers & Tags")]
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private LayerMask ObsticalLayer;
     #endregion
 
     private void Awake()

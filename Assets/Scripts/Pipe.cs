@@ -74,6 +74,8 @@ public class Pipe : MonoBehaviour
     private void Warp(Transform player)
     {
         player.position = connectedPoint.position;
+        MovingCamera movingCamera = playerCamera.GetComponent<MovingCamera>();
+        movingCamera.enabled = false;
         playerCamera.transform.position = undergroundCameraPosition;
         if (pipeFacing == Direction.Left)
         {
@@ -82,6 +84,8 @@ public class Pipe : MonoBehaviour
             _finishedWarp = true;
             return;
         }
+        movingCamera.enabled = true;
+        movingCamera.previousXPos = playerCamera.transform.position.x;
         ResumeTime(player);
     }
 

@@ -14,7 +14,6 @@ public enum BlockTypes : int
 public class TileHit : MonoBehaviour
 {
     [SerializeField] Sprite emptyBlock;
-    [SerializeField] PlayerManager playerManager;
     [SerializeField] private BlockTypes blockType;
     [SerializeField] private GameObject[] possibleItemsToSpawn;
 
@@ -24,6 +23,8 @@ public class TileHit : MonoBehaviour
     private bool timerStarted = false;
     private AudioSource audioSource;
     private BoxCollider2D boxCollider2D;
+    private PlayerManager playerManager;
+    private Vector3 lastMarioPosition;
 
     private void Awake()
     {
@@ -58,8 +59,10 @@ public class TileHit : MonoBehaviour
     {
         if (!animating && maxHits != 0 && collision.gameObject.CompareTag("Player"))
         {
+            playerManager = collision.gameObject.GetComponent<PlayerManager>();
             if (TestCollision(collision.transform, transform, Vector2.up))
             {
+                lastMarioPosition = collision.gameObject.GetComponent<Transform>().position;
                 Hit();
             }
         }
@@ -69,8 +72,11 @@ public class TileHit : MonoBehaviour
     {
         if (animating && collision.gameObject.CompareTag("Enemy"))
         {
-            //Check if enemy has taken damage
-            //TODO: Deal damage to enemy
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (!enemy.dead)
+            {
+                enemy.death(lastMarioPosition);
+            }
         }
     }
 
@@ -115,6 +121,7 @@ public class TileHit : MonoBehaviour
 
         if (maxHits == 0)
         {
+            GetComponent<Animator>().enabled = false;
             spriteRenderer.sprite = emptyBlock;
         }
 

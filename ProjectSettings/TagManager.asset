@@ -23,7 +23,7 @@ TagManager:
   - Background
   - Background Details
   - Camera
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -51,9 +51,9 @@ TagManager:
   - name: Background
     uniqueID: 4131258295
     locked: 0
-  - name: Player
-    uniqueID: 1136789059
-    locked: 0
   - name: Foreground
     uniqueID: 2343567079
+    locked: 0
+  - name: Player
+    uniqueID: 1136789059
     locked: 0
