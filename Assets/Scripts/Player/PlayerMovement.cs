@@ -82,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
             if (Input.Player.Move.ReadValue<Vector2>().x != 0)
                 if (LastOnGroundTime >= data.coyoteTime)
                 {
-                    Debug.Log(LastOnGroundTime + ", " + data.coyoteTime);
                     CheckDirectionToFace(Input.Player.Move.ReadValue<Vector2>().x > 0);
                 }
         #endregion
