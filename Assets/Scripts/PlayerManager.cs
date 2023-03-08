@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] AudioClip powerupClip;
+    [SerializeField] AudioClip oneUpClip;
+
     public int PlayerState = 1;
     public float InvincibleTimer = 8;
     public float ShotDelay = 0.25f;
@@ -19,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     private Animator MarioAnimator;
     private BoxCollider2D Collider;
     private PlayerMovement MarioMove;
+    private AudioSource AudioSource;
     public float Timer;
     public float FireTimer = 0;
     public int BurstCount = 1;
@@ -29,6 +33,7 @@ public class PlayerManager : MonoBehaviour
         Collider = GetComponent<BoxCollider2D>();
         MarioAnimator = GetComponentInChildren<Animator>();
         MarioAnimation = GetComponent<MarioAnim>();
+        AudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -76,11 +81,13 @@ public class PlayerManager : MonoBehaviour
             {
                 Timer = InvincibleTimer;
                 Invincible = true;
+                AudioSource.clip = powerupClip;
             }
             else
             {
                 if ((int)Collected.Type > PlayerState)
                 {
+                    AudioSource.clip = powerupClip;
                     Time.timeScale = 0;
                     MarioAnimation.Play = false;
                     PlayerState++;
@@ -97,6 +104,7 @@ public class PlayerManager : MonoBehaviour
             }
             Collider.size = new Vector2(1, (PlayerState > 1 ? 2 : 1));
             Collider.offset = new Vector2(0, (PlayerState > 1 ? 0.5f : 0));
+            AudioSource.Play();
             Destroy(collision.gameObject);
         }
     }

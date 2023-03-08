@@ -225,6 +225,26 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1554282382139848408, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
+      propertyPath: oneUpClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c29251a5e3cbbd4fb36aade0a082982, type: 3}
+    - target: {fileID: 1554282382139848408, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
+      propertyPath: powerupClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f372e6c46436f044a860fdb634fafe62, type: 3}
+    - target: {fileID: 1554282382139848408, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
+      propertyPath: powerupClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1554282382139848408, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
+      propertyPath: powerupClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f372e6c46436f044a860fdb634fafe62, type: 3}
+    - target: {fileID: 1554282382139848408, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
+      propertyPath: powerupClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7c29251a5e3cbbd4fb36aade0a082982, type: 3}
     - target: {fileID: 1554282382139848409, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 192
