@@ -101,8 +101,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1951400217
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -1484009104, guid: f09adcba088e85144953fadb931b5e50, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -149,7 +149,7 @@ Transform:
   - {fileID: 4249350552372740260}
   - {fileID: 4249350551994040997}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4249350552890513315
 MonoBehaviour:
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec279dce90126544e950cf319f1dfbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
   flagTop: {fileID: 4249350551994040997}
+  stageClearAudioClip: {fileID: 8300000, guid: e28cec33c3226504f9349f9485a6dc24, type: 3}
 --- !u!61 &4249350552890513343
 BoxCollider2D:
   m_ObjectHideFlags: 0

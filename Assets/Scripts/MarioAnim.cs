@@ -23,7 +23,6 @@ public class MarioAnim : MonoBehaviour
     private string[] Jump = new string[] { "Jump-Small", "Jump-Big", "Jump-Fire" };
     private string[] Turn = new string[] { "Turn-Small", "Turn-Big", "Turn-Fire" };
     private string[] Slide = new string[] { "Slide-Small", "Slide-Big", "Slide-Fire" };
-    private bool Falling = false;
     public int layer = 0;
     void Start()
     {

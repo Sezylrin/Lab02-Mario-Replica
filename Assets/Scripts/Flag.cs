@@ -20,13 +20,16 @@ public class Flag : MonoBehaviour
     private Tween _flagSlideTween;
     private bool _isSliding;
     private MarioAnim _marioAnim;
+    private LevelManager _levelManager;
 
     public bool IsExiting { get; private set; }
+    public AudioClip stageClearAudioClip;
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _gameManager = FindObjectOfType<GameManager>();
+        _levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -108,6 +111,8 @@ public class Flag : MonoBehaviour
         _playerMovement.Input.Disable();
         _playerMovement.rb.velocity = Vector2.zero;
         _playerMovement.rb.isKinematic = true;
+        //Stop BG Music and swap tracks
+        _levelManager.GetComponent<AudioSource>().clip = stageClearAudioClip;
     }
 
     private void AddScore(Collider2D col)

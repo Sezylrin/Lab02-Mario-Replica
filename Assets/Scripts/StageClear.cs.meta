@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 52ad5d1a05bb4b949909a834bbeccdc3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - stageClearAudioClip: {fileID: 8300000, guid: e28cec33c3226504f9349f9485a6dc24, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
