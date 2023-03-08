@@ -13,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject FireProjectile;
     public float offset;
 
+    private MarioAnim MarioAnimation;
     private Vector2 Direction = Vector2.left;
     private Animator MarioAnimator;
     private BoxCollider2D Collider;
@@ -27,6 +28,7 @@ public class PlayerManager : MonoBehaviour
         SpriteRender = MarioSprite.GetComponent<SpriteRenderer>();
         Collider = GetComponent<BoxCollider2D>();
         MarioAnimator = GetComponentInChildren<Animator>();
+        MarioAnimation = GetComponent<MarioAnim>();
     }
 
     // Update is called once per frame
@@ -78,7 +80,10 @@ public class PlayerManager : MonoBehaviour
             {
                 if ((int)Collected.Type > PlayerState)
                 {
+                    Time.timeScale = 0;
+                    MarioAnimation.Play = false;
                     PlayerState++;
+                    MarioPowerUp();
                     if (PlayerState == 2)
                     {
                         MarioSprite.transform.Translate(Vector3.up * 0.5f, Space.Self);
@@ -95,16 +100,24 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void ChangeSprite()
+    private void MarioPowerUp()
     {
-        Debug.Log("Ran");
-        SpriteRender.sprite = Sprites[PlayerState];
+        if (PlayerState == 2)
+        {
+            Debug.Log("ran");
+            MarioAnimator.Play("Grow");
+        }
+        if(PlayerState == 3)
+        {
+            MarioAnimator.Play("Grow-Fire");
+        }
     }
 
     public void TakeDamage()
     {
         //TODO: Implement functionality
-        PlayerState--;
+        PlayerState = 1;
+        MarioSprite.transform.Translate(Vector3.up * 0.5f * -1, Space.Self);
         //PlayerState = 0 means player has died
         if (PlayerState == 0)
         {

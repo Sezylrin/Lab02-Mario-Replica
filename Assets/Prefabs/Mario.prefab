@@ -172,7 +172,7 @@ Transform:
   - {fileID: 1554282381924748882}
   - {fileID: 1554282380847252782}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1554282382139848413
 Rigidbody2D:
@@ -304,3 +304,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: bafd72cc7842bef4ea45a9721f00acaa, type: 2}
   NeedTurn: 0
+  Play: 1

@@ -13,6 +13,7 @@ public class MarioAnim : MonoBehaviour
     [SerializeField] private PlayerData data;
     private bool IsRight = true;
     public bool NeedTurn = false;
+    public bool Play = true;
 
     private string[] Idle = new string[] { "Idle-Small", "Idle-Big", "Idle-Fire" };
     private string[] Walk = new string[] { "Walk-Small", "Walk-Big", "Walk-Fire" };
@@ -30,6 +31,17 @@ public class MarioAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (MarioAnimator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+        {
+            Play = true;
+            Time.timeScale = 1;
+        }
+        if (!Play)
+            return;
+        if (MarioState.PlayerState == 3 && Input.GetKeyDown(KeyCode.X))
+        {
+            MarioAnimator.Play("Fire-Fire");
+        }
         if(Mathf.Abs(Rigid2D.velocity.x) > data.groundMaxSpeed * 0.4f)
         {
             Debug.Log("running1");
