@@ -111,6 +111,7 @@ public class PlayerManager : MonoBehaviour
 
     private void MarioPowerUp()
     {
+        MarioAnimator.speed = 1;
         if (PlayerState == 2)
         {
             MarioAnimator.Play("Grow");

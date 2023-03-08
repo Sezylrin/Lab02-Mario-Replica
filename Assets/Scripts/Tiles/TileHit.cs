@@ -121,6 +121,7 @@ public class TileHit : MonoBehaviour
 
         if (maxHits == 0)
         {
+            GetComponent<Animator>().enabled = false;
             spriteRenderer.sprite = emptyBlock;
         }
 
