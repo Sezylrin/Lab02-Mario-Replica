@@ -79,24 +79,19 @@ public class PlayerManager : MonoBehaviour
                 if ((int)Collected.Type > PlayerState)
                 {
                     PlayerState++;
-                    ChangeSprite();
+                    if (PlayerState == 2)
+                    {
+                        MarioSprite.transform.Translate(Vector3.up * 0.5f, Space.Self);
+                    }
                 }
             }
             if (Collected.Type == PowerUp.PowerUps.OneUp)
             {
                 //game manager icriment lives
             }
-            MarioAnimator.Play("Grow", 0, 0);
-            MarioSprite.transform.Translate(Vector3.up * (PlayerState == 2 ? 0.5f : 0), Space.Self);
             Collider.size = new Vector2(1, (PlayerState > 1 ? 2 : 1));
             Collider.offset = new Vector2(0, (PlayerState > 1 ? 0.5f : 0));
             Destroy(collision.gameObject);
         }
-    }
-
-    private void ChangeSprite()
-    {
-        Debug.Log("Ran");
-        SpriteRender.sprite = Sprites[PlayerState];
     }
 }
