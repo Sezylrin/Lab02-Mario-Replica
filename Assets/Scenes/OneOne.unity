@@ -213,6 +213,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1554282381924748883, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1554282381924748883, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1136789059
+      objectReference: {fileID: 0}
     - target: {fileID: 1554282381924748885, guid: c3e7f6d2fd1ceaf4a8de0201e4125e00, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -375,7 +383,7 @@ GameObject:
   - component: {fileID: 951005364}
   - component: {fileID: 951005363}
   - component: {fileID: 951005365}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +444,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1951400217
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.03125, y: 0.014854431, z: 0}
@@ -1906,7 +1914,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1951400217
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -8917,9 +8925,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -163709001
+  m_SortingLayer: 1
+  m_SortingOrder: -100
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0.043190002, z: 0}
   m_MaxChunkCount: 16
@@ -40592,6 +40600,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1825633575568468967, guid: fa8d45da07def024e84345dfdb6ed880, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825633575568468967, guid: fa8d45da07def024e84345dfdb6ed880, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1136789059
+      objectReference: {fileID: 0}
     - target: {fileID: 1825633575568468985, guid: fa8d45da07def024e84345dfdb6ed880, type: 3}
       propertyPath: m_Name
       value: Goomba
@@ -40718,6 +40734,14 @@ PrefabInstance:
       propertyPath: playerScript
       value: 
       objectReference: {fileID: 543882359}
+    - target: {fileID: 8137902431477367400, guid: ebd17a52cf5bcc84cb4e16b0bf421480, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137902431477367400, guid: ebd17a52cf5bcc84cb4e16b0bf421480, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1136789059
+      objectReference: {fileID: 0}
     - target: {fileID: 8137902431477367401, guid: ebd17a52cf5bcc84cb4e16b0bf421480, type: 3}
       propertyPath: m_RootOrder
       value: 7
