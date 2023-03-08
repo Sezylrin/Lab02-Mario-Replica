@@ -120,7 +120,6 @@ public class MarioAnim : MonoBehaviour
         }
         else
         {
-            
             IsRight = MarioMove.IsFacingRight;
             MarioAnimator.speed = 1;
             MarioAnimator.Play(Walk[MarioState.PlayerState - 1]);

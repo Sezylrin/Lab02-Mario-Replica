@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
                 highScore = score;
             }
             levelStarted = false;
-            lives--;
             GameCanvasManager.Instance.SetTimerText("");
             currentTime = 0;
             Loader.Load(Loader.Scene.PreLevel);
@@ -172,7 +171,7 @@ public class GameManager : MonoBehaviour
 
     public void HandleMarioDeath()
     {
-        if (lives == 0)
+        if (--lives == 0)
         {
             GameOver();
         }

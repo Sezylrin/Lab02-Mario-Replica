@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554282380847252782}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ Transform:
   - {fileID: 1554282381924748882}
   - {fileID: 1554282380847252782}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1554282382139848413
 Rigidbody2D:
@@ -260,8 +260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb42a6f94b9cbe408c65d23cc587451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupClip: {fileID: 0}
-  oneUpClip: {fileID: 0}
+  powerupClip: {fileID: 8300000, guid: f372e6c46436f044a860fdb634fafe62, type: 3}
+  oneUpClip: {fileID: 8300000, guid: 7c29251a5e3cbbd4fb36aade0a082982, type: 3}
+  marioDieClip: {fileID: 8300000, guid: abae1fd76b2881543b5677ed7f92a7ec, type: 3}
   PlayerState: 1
   InvincibleTimer: 8
   ShotDelay: 0.25
@@ -298,7 +299,7 @@ MonoBehaviour:
   groundCheckSize: {x: 0.9, y: 0.8}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   ObsticalLayer:
     serializedVersion: 2
     m_Bits: 0
@@ -426,7 +427,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1554282382139848415}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 27c7433824e4eea48b40b2d4187082f7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -449,6 +450,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.005}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0

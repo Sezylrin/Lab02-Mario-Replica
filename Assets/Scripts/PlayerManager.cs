@@ -7,6 +7,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] AudioClip powerupClip;
     [SerializeField] AudioClip oneUpClip;
 
+    public AudioSource AudioSource { get; private set; }
+    public AudioClip marioDieClip;
     public int PlayerState = 1;
     public float InvincibleTimer = 8;
     public float ShotDelay = 0.25f;
@@ -22,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     private Animator MarioAnimator;
     private BoxCollider2D Collider;
     private PlayerMovement MarioMove;
-    private AudioSource AudioSource;
+    private bool HandledDeath;
     public float Timer;
     public float FireTimer = 0;
     public int BurstCount = 1;
@@ -70,9 +72,11 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-        if (PlayerState == 0 && transform.position.y < -5.5f)
+        if (PlayerState == 0 && !AudioSource.isPlaying)
         {
+            if (HandledDeath) return;
             GameManager.Instance.HandleMarioDeath();
+            HandledDeath = true;
         }
     }
 
@@ -108,6 +112,7 @@ public class PlayerManager : MonoBehaviour
             }
             Collider.size = new Vector2(1, (PlayerState > 1 ? 2 : 1));
             Collider.offset = new Vector2(0, (PlayerState > 1 ? 0.5f : 0));
+            AudioSource.clip = oneUpClip;
             AudioSource.Play();
             Destroy(collision.gameObject);
         }
@@ -136,11 +141,15 @@ public class PlayerManager : MonoBehaviour
         //PlayerState = 0 means player has died
         if (PlayerState == 0)
         {
+            FindObjectOfType<LevelManager>().GetComponent<AudioSource>().Pause();
+            AudioSource.clip = marioDieClip;
+            AudioSource.Play();
             MarioAnimation.Play = false;
             MarioAnimator.Play("Death");
             Rigidbody2D Rigid = GetComponent<Rigidbody2D>();
             GetComponent<PlayerMovement>().enabled = false;
             GetComponent<BoxCollider2D>().excludeLayers = ~0;
+            GetComponent<CapsuleCollider2D>().excludeLayers = ~0;
             Rigid.velocity = Vector2.zero;
             Rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
         }
