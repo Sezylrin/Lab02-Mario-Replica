@@ -26,7 +26,11 @@ public class EnemyDeathTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (EnemyScript.dead)
+        {
+            triggerCollider.enabled = false;
+        }
+        else triggerCollider.enabled = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
