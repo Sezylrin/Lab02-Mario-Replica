@@ -16,13 +16,17 @@ public class MainMenu : MonoBehaviour
     {
         optionPositions[0] = new Vector2(goombaRectTransform.anchoredPosition.x, goombaRectTransform.anchoredPosition.y);
         optionPositions[1] = new Vector2(goombaRectTransform.anchoredPosition.x, -32f);
-        highscoreText.text = GameManager.Instance.GetHighScore().ToString("D6");
         audioSource = GetComponent<AudioSource>();
         //Destroy the GameCanvasManager if it exists
         if (GameObject.Find("Canvas"))
         {
             Destroy(GameObject.Find("Canvas"));
         }
+    }
+
+    private void Start()
+    {
+        highscoreText.text = GameManager.Instance.GetHighScore().ToString("D6");
     }
 
     private void Update()
