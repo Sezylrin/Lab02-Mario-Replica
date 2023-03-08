@@ -10,6 +10,8 @@ public class MarioAnim : MonoBehaviour
     private Rigidbody2D Rigid2D;
     private PlayerManager MarioState;
     private PlayerMovement MarioMove;
+    private float FPS = 1 / 12;
+    public float Timer;
     [SerializeField] private PlayerData data;
     private bool IsRight = true;
     public bool NeedTurn = false;
@@ -19,8 +21,10 @@ public class MarioAnim : MonoBehaviour
     private string[] Jump = new string[] { "Jump-Small", "Jump-Big", "Jump-Fire" };
     private string[] Turn = new string[] { "Turn-Small", "Turn-Big", "Turn-Fire" };
     private bool Falling = false;
+    public int layer = 0;
     void Start()
     {
+        Timer = FPS;
         MarioAnimator = GetComponentInChildren<Animator>();
         Rigid2D = GetComponent<Rigidbody2D>();
         MarioState = GetComponent<PlayerManager>();
@@ -30,9 +34,42 @@ public class MarioAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (MarioState.Invincible)
+        {
+            Timer -= Time.deltaTime;
+            if(Timer <= 0)
+            {
+                if(layer == 0)
+                {
+                    MarioAnimator.SetLayerWeight(1, 0);
+                    MarioAnimator.SetLayerWeight(2, 0);
+                    MarioAnimator.SetLayerWeight(3, 0);
+                }
+                if (layer == 1)
+                {
+                    MarioAnimator.SetLayerWeight(1, 1);
+                    MarioAnimator.SetLayerWeight(2, 0);
+                    MarioAnimator.SetLayerWeight(3, 0);
+                }
+                if (layer == 2)
+                {
+                    MarioAnimator.SetLayerWeight(1, 0);
+                    MarioAnimator.SetLayerWeight(2, 1);
+                    MarioAnimator.SetLayerWeight(3, 0);
+                }
+                if (layer == 3)
+                {
+                    MarioAnimator.SetLayerWeight(1, 0);
+                    MarioAnimator.SetLayerWeight(2, 0);
+                    MarioAnimator.SetLayerWeight(3, 1);
+                }
+                Timer = FPS;
+                layer++;
+                layer %= 4;
+            }
+        }
         if(Mathf.Abs(Rigid2D.velocity.x) > data.groundMaxSpeed * 0.4f)
         {
-            Debug.Log("running1");
             NeedTurn = true;
         }
         if (Rigid2D.velocity == Vector2.zero)

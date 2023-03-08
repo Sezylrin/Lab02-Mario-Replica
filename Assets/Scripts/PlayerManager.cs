@@ -12,13 +12,13 @@ public class PlayerManager : MonoBehaviour
     public GameObject MarioSprite;
     public GameObject FireProjectile;
     public float offset;
+    public bool Invincible = false;
 
     private Vector2 Direction = Vector2.left;
     private Animator MarioAnimator;
     private BoxCollider2D Collider;
     private SpriteRenderer SpriteRender;
-    private bool Invincible = false;
-    private float Timer;
+    public float Timer;
     public float FireTimer = 0;
     public int BurstCount = 1;
     // Start is called before the first frame update
